@@ -1,5 +1,14 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  background: #E3E2DF;
 }
 
 .App-logo {
