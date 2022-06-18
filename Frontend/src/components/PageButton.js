@@ -1,9 +1,9 @@
 import React from 'react';
 import '../styles/PageButton.css';
 
-const PageButton = ({ page, active, loadPage }) => {
+const PageButton = ({ page, loadPage, isDisabled }) => {
     return(
-        <button type="button" onClick={loadPage} className={ (active) ? 'page-button active' : 'page-button'}>{ page }</button>
+        <button type="button" onClick={loadPage} className={'page-button'} disabled={isDisabled}>{ page }</button>
     );
 };
 

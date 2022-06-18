@@ -1,14 +1,15 @@
+:root {
+  --main-background-color: #F7F9FB;
+}
+
 .App {
   /* text-align: center; */
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
   font-family: 'Poppins', sans-serif;
-  background: #E3E2DF;
+  background: var(--main-background-color);
+  overflow: auto;
 }
 
 .App-logo {
@@ -46,6 +47,15 @@
   }
 }
 
+
+.Watches {
+  margin: 35px 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
 
 .pagination-bar {
   display: flex;

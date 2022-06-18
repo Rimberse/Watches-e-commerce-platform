@@ -20,7 +20,7 @@
 }
   
 /* Change style if the next page is loaded, fill button for active page */
-.page-button.active {
+.page-button:hover {
     color: #fff;
     background-color: var(--main-page-background-color);
 }
