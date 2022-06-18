@@ -1,8 +1,12 @@
+import React, { useState, useRef } from 'react';
 import './App.css';
 import Card from './components/Card';
+import PageButton from './components/PageButton';
 
+const App = () => {
+  const [page, setPage] = useState(Number(1));
+  const lastPage = useRef(0);
 
-function App() {
   const watch1 = {
     name: 'Watch name',
     brand: 'Watch brand',
@@ -35,12 +39,31 @@ function App() {
     price: '599,99 €'
   }
 
+  const loadPrevPage = () => {
+    if (page <= 1)
+        return;
+
+    setPage(page - 1);
+  }
+
+  const loadNextPage = () => {
+      if (page >= lastPage.current)
+          return;
+
+      setPage(page + 1);
+  };
+
   return (
     <div className="App">
       <Card watch={ watch1 } />
       <Card watch={ watch2 } />
       <Card watch={ watch3 } />
       <Card watch={ watch4 } />
+
+      <div className="pagination-bar">
+        <PageButton page={ '\u2190 Prev' } />
+        <PageButton page={ 'Next \u2192' } />
+      </div>
     </div>
   );
 }

@@ -45,3 +45,9 @@
     transform: rotate(360deg);
   }
 }
+
+
+.pagination-bar {
+  display: flex;
+  justify-content: center;
+}
