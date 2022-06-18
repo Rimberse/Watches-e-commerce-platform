@@ -8,12 +8,18 @@ const Card = ({ watch }) => {
     <>
       <div className='watch-card'>
         <div className='watch-card-image'>
-            <img src='https://consumer-img.huawei.com/content/dam/huawei-cbg-site/common/mkt/pdp/wearables/watch-3-pro/img/one/huawei-watch-3-pro-kv.png' alt='Watch'></img>
+            <img src={ watch.image } alt='Watch'></img>
         </div>
-        <div className='watch-card-info'>
-            <h1 className='watch-card-info-name'>Watch name</h1>
-            <h2 className='watch-card-info-brand'>Brand name</h2>
-            <h3 className='watch-card-info-description'>Description goes here.</h3>
+        <div className='watch-card-details'>
+          <div className='watch-card-details-info'>
+              <h2 className='watch-card-details-info-name'>{ watch.name }</h2>
+              <h3 className='watch-card-details-info-brand'><span>{ watch.brand }</span></h3>
+              <p className='watch-card-details-info-description'>{ watch.description }</p>
+              <div className='watch-card-details-info-bottom'>
+                <h3 className='watch-card-details-info-price'>{ watch.price }</h3>
+                <button className='watch-card-details-info-cart'>Add to cart</button>
+              </div>
+          </div>
         </div>
       </div>
     </>
