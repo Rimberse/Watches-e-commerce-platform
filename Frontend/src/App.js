@@ -1,5 +1,7 @@
 import './App.css';
 import Card from './components/Card';
+import React from 'react';
+
 
 
 function App() {
@@ -36,12 +38,16 @@ function App() {
   }
 
   return (
+    <>
     <div className="App">
       <Card watch={ watch1 } />
       <Card watch={ watch2 } />
       <Card watch={ watch3 } />
       <Card watch={ watch4 } />
     </div>
+    
+    </>
+    
   );
 }
 
