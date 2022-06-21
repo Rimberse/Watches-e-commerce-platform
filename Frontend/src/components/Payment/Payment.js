@@ -1,10 +1,25 @@
 import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PaypalCheckoutButton from '../PaypalCheckoutButton'
 import "./style.css";
+import axios from 'axios';
 
 const Payment = () => {
+  const [data, setData] = useState(null);
+    
+  useEffect(() => {
+    const loadData = async () => {
+        try{
+            const response = await axios.get("http://localhost:8000/api/get");
+            setData(response);
 
+        } catch (error){
+
+        }
+      };
+
+    loadData();
+  }, []);
     const product = [
       {
         name: 'Watch name',
@@ -24,35 +39,57 @@ const Payment = () => {
 
     let total = 0;
     
-    const calcTotal = () => {
-      product.forEach(elem => {
-        total += elem.price
-      })
+
+    if(data == null){
+      return(
+        <h1>Page loading ...</h1>
+      )
+    }
+    else{
+      console.log(data);
+      const calcTotal = () => {
+        data.data.forEach(elem => {
+          total += elem.price
+        })
+      }
+      
+      calcTotal();
+  
+  
+    return (
+      <body>
+  <div className='title'>
+          <h1 className='payment'>Payment</h1>
+          <p className='pay-with-paypal'>Pay with PayPal</p>
+          <br/>
+          <div className="paypal-button-container">
+          <PayPalScriptProvider options={{"client-id":process.env.REACT_APP_PAYPAL_CLIENT_ID}}>
+        <PayPalButtons createOrder={function(data, actions) {
+          
+        // Set up the transaction
+        return actions.order.create({
+          purchase_units: [{
+            amount: {
+              value: total
+            }
+          }]
+        });
+        }}
+        onApprove={function(data, actions) {
+          // This function captures the funds from the transaction.
+          return actions.order.capture().then(function(details) {
+            // This function shows a transaction success message to your buyer.
+            alert('Transaction completed by ' + details.payer.name.given_name);
+          });
+        }} ></PayPalButtons>
+      </PayPalScriptProvider>
+          </div>
+      </div>
+      </body>
+      
+    )
     }
     
-    calcTotal();
-
-  return (
-    <div className='title'>
-        <h1>Payment</h1>
-        <p className='pay-with-paypal'>Pay with PayPal</p>
-        <div className="paypal-button-container">
-        <PayPalScriptProvider options={{"client-id":"AVzSRfz6W2mUqu_Vx4wubVEk5C0q94tpusPIjiNMEd_hC4YyPmTt8qyE0BWRNnGNdZjgfONQTP141zlw"}}>
-      <PayPalButtons createOrder={function(data, actions) {
-        
-      // Set up the transaction
-      return actions.order.create({
-        purchase_units: [{
-          amount: {
-            value: total
-          }
-        }]
-      });
-      }} ></PayPalButtons>
-    </PayPalScriptProvider>
-        </div>
-    </div>
-  )
 }
 
 export default Payment

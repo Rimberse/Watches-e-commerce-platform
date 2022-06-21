@@ -1,6 +1,7 @@
 import './App.css';
 import Card from './components/Card';
 import React from 'react';
+import Navbar from './components/Navbar/Navbar'
 
 
 
@@ -37,17 +38,29 @@ function App() {
     price: '599,99 €'
   }
 
+  const watch5 = {
+    name: 'Frog watch',
+    brand: 'Watch brand',
+    description: 'Watch description goes here...',
+    image: 'https://cdn.laredoute.com/products/c/1/4/c14af5a8bda51f67220beb43b47ad506.jpg?imgopt=twic&twic=v1/cover=1200x1200',
+    price: '5 €'
+  }
+
   return (
-    <>
+
+    <body>
+    <div>
+    <Navbar></Navbar>
+    </div>
+    
     <div className="App">
       <Card watch={ watch1 } />
       <Card watch={ watch2 } />
       <Card watch={ watch3 } />
       <Card watch={ watch4 } />
+      <Card watch={ watch5 } />
     </div>
-    
-    </>
-    
+    </body>
   );
 }
 
