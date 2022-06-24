@@ -1,12 +1,8 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
+import Watches from './components/Watches';
 import './App.css';
-import Card from './components/Card';
-import PageButton from './components/PageButton';
 
 const App = () => {
-  const [page, setPage] = useState(Number(1));
-  const lastPage = useRef(10);   // 0
-
   const watch1 = {
     name: 'Watch name',
     brand: 'Watch brand',
@@ -39,35 +35,9 @@ const App = () => {
     price: '599,99 €'
   }
 
-  const loadPrevPage = () => {
-    if (page <= 1)
-        return;
-
-    setPage(page - 1);
-  }
-
-  const loadNextPage = () => {
-      if (page >= lastPage.current)
-          return;
-
-      console.log(page);
-      setPage(page + 1);
-  };
-
   return (
     <div className="App">
-      <div></div>
-      <div className="Watches">
-        <Card watch={ watch1 } />
-        <Card watch={ watch2 } />
-        <Card watch={ watch3 } />
-        <Card watch={ watch4 } />
-      </div>
-
-      <div className="pagination-bar">
-        <PageButton page={ '\u2190   Prev' } loadPage={ () => loadPrevPage() } isDisabled={ page > 1 ? false : true } />
-        <PageButton page={ 'Next   \u2192' } loadPage={ () => loadNextPage() } isDisabled={ page < lastPage.current ? false : true } />
-      </div>
+      <Watches />
     </div>
   );
 }

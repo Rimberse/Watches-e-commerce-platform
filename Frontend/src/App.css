@@ -47,8 +47,8 @@
   }
 }
 
-
-.Watches {
+ul {
+  list-style-type: none;
   margin: 35px 0;
   padding: 0;
   display: flex;
@@ -57,7 +57,6 @@
   align-items: center;
 }
 
-.pagination-bar {
-  display: flex;
-  justify-content: center;
+ul > li {
+  display: inline-block;
 }
