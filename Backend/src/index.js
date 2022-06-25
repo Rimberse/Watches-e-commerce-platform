@@ -71,6 +71,16 @@ app.put("/api/shop/:id", async (request, response, next) => {
   }
 });
 
+// DELETE endpoint used to remove the specific watch from the store
+app.delete("/api/shop/:id", async (request, response, next) => {
+  try {
+    response.json(await shop.remove(request.params.id));
+  } catch (error) {
+    console.error(`Error while removing a watch `, error.message);
+    next(error);
+  }
+});
+
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

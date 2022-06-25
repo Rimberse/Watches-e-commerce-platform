@@ -27,3 +27,6 @@ Content-Type: application/json
 {
     "Name": "Test", "Type": "Mechanical", "Price": 999.99, "Brand": "Test", "Weight": 5, "MaterialType": "Material", "Color": "Black", "WristSize": 3, "DialWatchType": "Test", "CollectionName": "Test", "Mechanism": "Quartz", "Stock": 0, "Image": "https://www.fine-s.fr/9959-thickbox_default/test.jpg", "Description": "Testing..."
 }
+
+### 
+DELETE http://localhost:5000/api/shop/31

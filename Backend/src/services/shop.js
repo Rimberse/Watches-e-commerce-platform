@@ -2,6 +2,8 @@ const db = require('./db');
 const helper = require('../helper');
 const config = require('../config');
 
+// This service is used to query/manipulate the database
+// Used to know the max number of pages (for pagination)
 const getQuantity = async () => {
     const rows = await db.query(
         `SELECT COUNT(*) AS quantity FROM Watches`
@@ -10,6 +12,7 @@ const getQuantity = async () => {
     return rows[0];
 }
 
+// Queries db and returns all watches
 const getAll = async (page = 1) => {
     const offset = helper.getOffset(page, config.listPerPage);
     
@@ -27,6 +30,7 @@ const getAll = async (page = 1) => {
     }
 }
 
+// Adds specific watch into the db
 const add = async watch => {
     const result = await db.query(
         `INSERT INTO Watches (Name, Type, Price, Brand, Weight, MaterialType, Color, WristSize, DialWatchType, CollectionName, Mechanism, Stock, Image, Description) 
@@ -43,6 +47,7 @@ const add = async watch => {
     return { message };
 }
 
+// Modifies a given watch, using it's id
 const modify = async (IdWatches, watch) => {
     const result = await db.query(
         `UPDATE Watches SET Name="${watch.Name}", Type="${watch.Type}", Price=${watch.Price}, Brand="${watch.Brand}", Weight=${watch.Weight}, 
@@ -59,9 +64,25 @@ const modify = async (IdWatches, watch) => {
     return { message };
 }
 
+// Removes a watch from the db
+const remove = async IdWatches => {
+    const result = await db.query(
+        `DELETE FROM Watches WHERE idWatches=${IdWatches}`
+    );
+
+    let message = 'Error while deleting a watch';
+
+    if (result.affectedRows) {
+        message = 'Watch has been removed successfully';
+    }
+
+    return { message };
+}
+
 module.exports = {
     getQuantity,
     getAll,
     add,
-    modify
+    modify,
+    remove
 }
