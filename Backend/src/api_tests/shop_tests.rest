@@ -2,3 +2,12 @@ GET http://localhost:5000/api/shop/quantity
 
 ###
 GET http://localhost:5000/api/shop
+
+
+### 
+POST http://localhost:5000/api/shop 
+Content-Type: application/json
+
+{
+    "Name": "ICE chrono", "Type": "Mechanical" , "Price": 139, "Brand": "Ice-watch", "Weight": 2.5, "MaterialType": "Mineral/Silicone", "Color": "Black", "WristSize": 30, "DialWatchType": "Chrono & Date", "CollectionName": "Trilogy", "Mechanism": "Quartz", "Stock": 2, "Image": "https://www.ice-watch.com/sites/default/files/styles/optimize/public/montres/019842_01_2.png?itok=S9fBDjIO", "Description": "pt for the sporty and masculine look of the ICE chrono - Trilogy! This impressive and robust black watch gives a unique style to your everyday outfits."
+}

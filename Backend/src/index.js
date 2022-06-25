@@ -33,7 +33,7 @@ app.get("/api/shop/quantity", async (request, response, next) => {
     response.json(await shop.getQuantity());
   } catch (error) {
     console.log(
-      `Error while getting total number of properties `,
+      `Error while getting total number of watches `,
       error.message
     );
     next(error);
@@ -46,6 +46,16 @@ app.get("/api/shop", async (request, response, next) => {
     response.json(await shop.getAll(request.query.page));
   } catch (error) {
     console.error(`Error while getting watches `, error.message);
+    next(error);
+  }
+});
+
+// POST endpoint used to add a new watch to the shop
+app.post("/api/shop", async (request, response, next) => {
+  try {
+    response.json(await shop.add(request.body));
+  } catch (error) {
+    console.error(`Error while adding watch `, error.message);
     next(error);
   }
 });

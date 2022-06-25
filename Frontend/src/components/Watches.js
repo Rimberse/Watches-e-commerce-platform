@@ -44,7 +44,7 @@ const Watches = () => {
     return (
         <>
           <ul>
-            {watches.map(watch => <li key={watch.idWatches}><Card watch={watch} /></li>)}
+            {watches.map(watch => <li key={watch.IdWatches}><Card watch={watch} /></li>)}
           </ul>
     
           <div className="pagination-bar">
