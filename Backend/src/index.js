@@ -60,6 +60,17 @@ app.post("/api/shop", async (request, response, next) => {
   }
 });
 
+// PUT endpoint used to update/alter watch's informations
+app.put("/api/shop/:id", async (request, response, next) => {
+  try {
+    console.log(request.body);
+    response.json(await shop.modify(request.params.id, request.body));
+  } catch (error) {
+    console.error(`Error while modifying watch `, error.message);
+    next(error);
+  }
+});
+
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

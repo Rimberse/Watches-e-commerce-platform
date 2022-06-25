@@ -9,5 +9,21 @@ POST http://localhost:5000/api/shop
 Content-Type: application/json
 
 {
-    "Name": "ICE chrono", "Type": "Mechanical" , "Price": 139, "Brand": "Ice-watch", "Weight": 2.5, "MaterialType": "Mineral/Silicone", "Color": "Black", "WristSize": 30, "DialWatchType": "Chrono & Date", "CollectionName": "Trilogy", "Mechanism": "Quartz", "Stock": 2, "Image": "https://www.ice-watch.com/sites/default/files/styles/optimize/public/montres/019842_01_2.png?itok=S9fBDjIO", "Description": "pt for the sporty and masculine look of the ICE chrono - Trilogy! This impressive and robust black watch gives a unique style to your everyday outfits."
+    "Name": "ICE chrono", "Type": "Mechanical", "Price": 139, "Brand": "Ice-watch", "Weight": 2.5, "MaterialType": "Mineral/Silicone", "Color": "Black", "WristSize": 30, "DialWatchType": "Chrono & Date", "CollectionName": "Trilogy", "Mechanism": "Quartz", "Stock": 2, "Image": "https://www.ice-watch.com/sites/default/files/styles/optimize/public/montres/019842_01_2.png?itok=S9fBDjIO", "Description": "pt for the sporty and masculine look of the ICE chrono - Trilogy! This impressive and robust black watch gives a unique style to your everyday outfits."
+}
+
+### 
+POST http://localhost:5000/api/shop 
+Content-Type: application/json
+
+{
+    "Name": "Test", "Type": "Mechanical", "Price": 999.99, "Brand": "Test", "Weight": 5, "MaterialType": "Material", "Color": "Black", "WristSize": 3, "DialWatchType": "Test", "CollectionName": "Test", "Mechanism": "Quartz", "Stock": 0, "Image": "https://www.blackcanary.com/pictures/product/OnePlus-Watch-noir-3-61ab1cc82a0c15.55240878.png", "Description": "Testing..."
+}
+
+### 
+PUT http://localhost:5000/api/shop/31
+Content-Type: application/json
+
+{
+    "Name": "Test", "Type": "Mechanical", "Price": 999.99, "Brand": "Test", "Weight": 5, "MaterialType": "Material", "Color": "Black", "WristSize": 3, "DialWatchType": "Test", "CollectionName": "Test", "Mechanism": "Quartz", "Stock": 0, "Image": "https://www.fine-s.fr/9959-thickbox_default/test.jpg", "Description": "Testing..."
 }

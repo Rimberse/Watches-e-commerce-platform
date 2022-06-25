@@ -43,8 +43,25 @@ const add = async watch => {
     return { message };
 }
 
+const modify = async (IdWatches, watch) => {
+    const result = await db.query(
+        `UPDATE Watches SET Name="${watch.Name}", Type="${watch.Type}", Price=${watch.Price}, Brand="${watch.Brand}", Weight=${watch.Weight}, 
+        MaterialType="${watch.MaterialType}", Color="${watch.Color}", WristSize=${watch.WristSize}, DialWatchType="${watch.DialWatchType}", 
+        CollectionName="${watch.CollectionName}", Mechanism="${watch.Mechanism}", Stock=${watch.Stock}, Image="${watch.Image}", Description="${watch.Description}" WHERE IdWatches=${IdWatches}`
+    );
+
+    let message = 'Error while updating a watch';
+
+    if (result.affectedRows) {
+        message = 'Watch has been updated successfully';
+    }
+
+    return { message };
+}
+
 module.exports = {
     getQuantity,
     getAll,
-    add
+    add,
+    modify
 }
