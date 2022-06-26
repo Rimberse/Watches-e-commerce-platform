@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import Card from './Card';
 import PageButton from './PageButton';
 import WatchForm from './WatchForm';
+import Cart from './Cart';
 import shopService from '../services/shop';
 import '../styles/Watches.css';
 
@@ -9,6 +10,7 @@ const Watches = () => {
     const [watches, setWatches] = useState([]);
     const [page, setPage] = useState(Number(1));
     const lastPage = useRef(0);
+    const [cart, setCart] = useState([]);
 
     useEffect(() => {
         shopService
@@ -25,8 +27,10 @@ const Watches = () => {
             })
     }, [page]);
 
-    console.log(lastPage.current);
-    console.log(watches);
+    const addToCart = watch => {
+        cart.push(watch);
+        setCart(cart.slice());
+    }
 
     const loadPrevPage = () => {
         if (page <= 1)
@@ -54,8 +58,9 @@ const Watches = () => {
     return (
         <>
             <WatchForm user={"Admin"} />
+            <Cart watch={cart[cart.length - 1]} contents={cart} />
             <ul>
-                {watches.map(watch => <li key={watch.IdWatches}><Card watch={watch} user={"Admin"} reflectChanges={refresh} /></li>)}
+                {watches.map(watch => <li key={watch.IdWatches}><Card watch={watch} user={"Admin"} reflectChanges={refresh} addToCart={() => { console.log(watch); addToCart(watch) } } /></li>)}
             </ul>
         
             <div className="pagination-bar">
