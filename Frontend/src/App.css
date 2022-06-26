@@ -1,5 +1,9 @@
 :root {
-  --main-background-color: #F7F9FB;
+  --main-background-color: #F7F7F7;
+  --main-success-button-color: #438945;
+  --main-error-button-color: #E40C2B;
+  --main-new-button-color: #ABF62D;
+  --main-icon-color: #1D2228;
 }
 
 .App {

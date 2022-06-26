@@ -17,7 +17,7 @@ const getAll = async (page = 1) => {
     const offset = helper.getOffset(page, config.listPerPage);
     
     const rows = await db.query(
-        `SELECT IdWatches, Name, Type, Price, Brand, Weight, MaterialType, Color, WristSize, DialWatchType, CollectionName, Mechanism, Stock, Image 
+        `SELECT IdWatches, Name, Type, Price, Brand, Weight, MaterialType, Color, WristSize, DialWatchType, CollectionName, Mechanism, Stock, Image, Description 
         FROM Watches LIMIT ${offset}, ${config.listPerPage}`
     );
 

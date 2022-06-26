@@ -1,13 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Card from './Card';
 import PageButton from './PageButton';
+import WatchForm from './WatchForm';
 import shopService from '../services/shop';
 import '../styles/Watches.css';
 
 const Watches = () => {
     const [watches, setWatches] = useState([]);
     const [page, setPage] = useState(Number(1));
-    const lastPage = useRef(0);   // 0
+    const lastPage = useRef(0);
 
     useEffect(() => {
         shopService
@@ -40,17 +41,27 @@ const Watches = () => {
     
         setPage(page + 1);
     };
+
+    const refresh = () => {
+        shopService
+            .getAll(page)
+            .then(watches => {
+                setWatches(watches.data);
+                setPage(Number(watches.meta.page));
+            })
+    }
     
     return (
         <>
-          <ul>
-            {watches.map(watch => <li key={watch.IdWatches}><Card watch={watch} /></li>)}
-          </ul>
-    
-          <div className="pagination-bar">
-            <PageButton page={ '\u2190   Prev' } loadPage={ () => loadPrevPage() } isDisabled={ page > 1 ? false : true } />
-            <PageButton page={ 'Next   \u2192' } loadPage={ () => loadNextPage() } isDisabled={ page < lastPage.current ? false : true } />
-          </div>
+            <WatchForm user={"Admin"} />
+            <ul>
+                {watches.map(watch => <li key={watch.IdWatches}><Card watch={watch} user={"Admin"} reflectChanges={refresh} /></li>)}
+            </ul>
+        
+            <div className="pagination-bar">
+                <PageButton page={ '\u2190   Prev' } loadPage={ () => loadPrevPage() } isDisabled={ page > 1 ? false : true } />
+                <PageButton page={ 'Next   \u2192' } loadPage={ () => loadNextPage() } isDisabled={ page < lastPage.current ? false : true } />
+            </div>
         </>
     );
 }
