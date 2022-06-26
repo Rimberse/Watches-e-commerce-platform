@@ -56,7 +56,7 @@ const Watches = () => {
     }
     
     return (
-        <>
+        <div className='store'>
             <WatchForm user={"Admin"} />
             <Cart watch={cart[cart.length - 1]} contents={cart} />
             <ul>
@@ -67,7 +67,7 @@ const Watches = () => {
                 <PageButton page={ '\u2190   Prev' } loadPage={ () => loadPrevPage() } isDisabled={ page > 1 ? false : true } />
                 <PageButton page={ 'Next   \u2192' } loadPage={ () => loadNextPage() } isDisabled={ page < lastPage.current ? false : true } />
             </div>
-        </>
+        </div>
     );
 }
 

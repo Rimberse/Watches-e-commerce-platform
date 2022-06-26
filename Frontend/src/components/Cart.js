@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import CartItem from './CartItem';
 import "../styles/Cart.css";
 
 const Cart = ({ user, watch, contents }) => {
@@ -48,6 +49,11 @@ const Cart = ({ user, watch, contents }) => {
 
     return(
         <>
+            <div className='cart'>
+                <ul>
+                    { items.map(item => <li key={item.watch.IdWatches}><CartItem item={item} /></li>) }
+                </ul>
+            </div>
         </>
     );
 }
