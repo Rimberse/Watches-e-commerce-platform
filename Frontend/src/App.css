@@ -1,14 +1,19 @@
+:root {
+  --main-background-color: #F7F7F7;
+  --main-success-button-color: #438945;
+  --main-error-button-color: #E40C2B;
+  --main-new-button-color: #ABF62D;
+  --main-icon-color: #1D2228;
+}
+
 .App {
   /* text-align: center; */
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
   font-family: 'Poppins', sans-serif;
-  background: #E3E2DF;
+  background: var(--main-background-color);
+  overflow: auto;
 }
 
 .App-logo {
@@ -44,4 +49,18 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+ul {
+  list-style-type: none;
+  margin: 35px 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+ul > li {
+  display: inline-block;
 }
