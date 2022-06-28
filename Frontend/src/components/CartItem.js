@@ -20,9 +20,9 @@ const CartItem = ({ item, decrease, increase, itemQuantity }) => {
                 <span className='details-name'>{ item.watch.Name }</span>
                 <span className='details-brand'>{ item.watch.Brand }</span>
                 <div className='details-quantity'>
-                    <button className='details-quantity-decrease' onClick={decrease}>-</button>
+                    <button className='details-quantity-decrease' onClick={decrease}></button>
                     <span className='details-quantity-count'>{ quantity }</span>
-                    <button className='details-quantity-increase' onClick={increase}>+</button>
+                    <button className='details-quantity-increase' onClick={increase}></button>
                 </div>
             </div>
             <span className='price'>{ formatter.format(item.quantity * item.watch.Price) }</span>

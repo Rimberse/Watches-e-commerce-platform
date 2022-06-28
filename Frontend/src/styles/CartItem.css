@@ -82,7 +82,7 @@
     justify-content: center;
     align-items: center;
     padding: 5px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
@@ -92,8 +92,16 @@
     background-color: var(--main-error-button-color);
 }
 
+.details-quantity-decrease:after {
+    content: '\2212';
+}
+
 .details-quantity-increase {
     background-color: var(--main-success-button-color);
+}
+
+.details-quantity-increase:after {
+    content: '\002B';
 }
 
 .price {

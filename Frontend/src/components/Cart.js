@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import CartItem from './CartItem';
 import "../styles/Cart.css";
+import { AiOutlineShopping } from 'react-icons/ai';
 
 const Cart = ({ user, watch, contents }) => {
     // Cart contents
     const [items, setItems] = useState([]);
     // Cart item quantity
     const [itemQuantity, setItemQuantity] = useState(0);
+    // Controls cart's visibility (if it's displayed or not)
+    const [displayCart, setDisplayCart] = useState(false);
 
     // Re-render the components each time the cart's contents changes
     useEffect(() => {
@@ -20,6 +23,7 @@ const Cart = ({ user, watch, contents }) => {
         currency: 'EUR'
     });
 
+    // Adds item to cart
     const addToCart = watch => {
         // Find item index by it's id
         const index = (items.map(item => item.watch.IdWatches).indexOf(watch.IdWatches));
@@ -36,6 +40,7 @@ const Cart = ({ user, watch, contents }) => {
         }
     }
 
+    // Empties cart
     const emptyCart = () => {
         // Do nothing is cart is empty
         if (items.filter(item => item.quantity > 0).length === 0) {
@@ -51,6 +56,7 @@ const Cart = ({ user, watch, contents }) => {
         setItems([]);
     }
 
+    // Inrrease item quantity in cart
     const increaseQuantity = watch => {
         // Find index of the item
         const index = (items.map(item => item.watch.IdWatches).indexOf(watch.IdWatches));
@@ -69,6 +75,7 @@ const Cart = ({ user, watch, contents }) => {
         }
     }
 
+    // Decrease item quantity in cart
     const decreaseQuantity = watch => {
         // Find index of the item
         const index = (items.map(item => item.watch.IdWatches).indexOf(watch.IdWatches));
@@ -87,6 +94,7 @@ const Cart = ({ user, watch, contents }) => {
         }
     }
 
+    // Used to calculate total price of cart contents
     const calculateTotal = () => {
         let total = 0;
         // Calculate total for each item by multiplying it's price times quantity of items in cart
@@ -95,11 +103,30 @@ const Cart = ({ user, watch, contents }) => {
         return formatter.format(total);
     }
 
+    // Toggles on/off cart contents with it's total price
+    const changeCartVisibility = () => setDisplayCart(!displayCart);
+
+    // Used to finalize the purchase. Used to store transaction information to db
+    const checkout = () => {
+        // No checkout if cart is empty
+        if (items.filter(item => item.quantity > 0).length <= 0) {
+            return;
+        }
+    
+        // Otherwise, redirect the client to payment page (via Paypal) & store the transaction informations to db if payment has been made successfully
+
+    }
+
     // Renders cart items based on cart content. For each cart item renders CartItem component, representing a small piece of information, concering a watch: name, brand, image & price. CartItem component gets rerendered each time quantity changes.
     // Quantity of the items could de increased of decreased using provided button in CartItem. If user tries to decrease quantity beyond 1, cart item gets removed from the cart and no longer displayed (hence why .filter is used before .map function)
     return(
         <>
-            <div className='cart'>
+            {(!displayCart && user === 'Client') && <div className='cart-preview'>
+                <button className='cart-preview-icon' onClick={changeCartVisibility}><AiOutlineShopping /></button>
+                <div className='cart-preview-items'>{ items.filter(item => item.quantity > 0).length }</div>
+            </div>}
+            {(displayCart && user === 'Client') && <div className='cart'>
+                <button className='cart-close' onClick={changeCartVisibility}></button>
                 <div className='cart-contents'>
                     <ul>
                         { items.filter(item => item.quantity > 0).map(item => <li key={item.watch.IdWatches}><CartItem item={item} itemQuantity={itemQuantity} decrease={() => decreaseQuantity(item.watch)} increase={() => increaseQuantity(item.watch)} /></li>) }
@@ -109,7 +136,8 @@ const Cart = ({ user, watch, contents }) => {
                     <button className='cart-operations-empty' onClick={emptyCart}>Empty Cart</button>
                     <span className='cart-operations-total'>{ calculateTotal() }</span>
                 </div>
-            </div>
+                <button className='cart-checkout' onClick={checkout}>Checkout</button>
+            </div>}
         </>
     );
 }
