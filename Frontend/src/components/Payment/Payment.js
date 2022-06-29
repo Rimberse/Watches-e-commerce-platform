@@ -10,7 +10,7 @@ const Payment = () => {
   useEffect(() => {
     const loadData = async () => {
         try{
-            const response = await axios.get("http://localhost:8000/api/get");
+            const response = await axios.get("http://localhost:5000/api/shop/basket");
             setData(response);
 
         } catch (error){
@@ -20,22 +20,7 @@ const Payment = () => {
 
     loadData();
   }, []);
-    const product = [
-      {
-        name: 'Watch name',
-        brand: 'Watch brand',
-        description: 'Watch description goes here...',
-        image: 'https://consumer-img.huawei.com/content/dam/huawei-cbg-site/common/mkt/pdp/wearables/watch-3-pro/img/one/huawei-watch-3-pro-kv.png',
-        price: 249
-      },
-      {
-        name: 'Watch name',
-        brand: 'Watch brand',
-        description: 'Watch description goes here...',
-        image: 'https://consumer-img.huawei.com/content/dam/huawei-cbg-site/common/mkt/pdp/wearables/watch-3-pro/img/one/huawei-watch-3-pro-kv.png',
-        price: 589
-      }
-    ]
+
 
     let total = 0;
     
@@ -46,11 +31,14 @@ const Payment = () => {
       )
     }
     else{
-      console.log(data);
+
       const calcTotal = () => {
         data.data.forEach(elem => {
-          total += elem.price
+          total += elem.Price
+          console.log(total)
         })
+        // Round cause paypal won't take too many numbers
+        total = Math.round(total)
       }
       
       calcTotal();
@@ -67,13 +55,19 @@ const Payment = () => {
         <PayPalButtons createOrder={function(data, actions) {
           
         // Set up the transaction
-        return actions.order.create({
-          purchase_units: [{
-            amount: {
-              value: total
-            }
-          }]
-        });
+        if(total != 0){
+          return actions.order.create({
+            purchase_units: [{
+              amount: {
+                value: total
+              }
+            }]
+          })
+        }
+        else{
+          console.log("Nothing found in the basket.")
+        }
+        
         }}
         onApprove={function(data, actions) {
           // This function captures the funds from the transaction.
