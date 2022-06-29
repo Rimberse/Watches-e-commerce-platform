@@ -1,0 +1,162 @@
+.status-message {
+    margin: 0 auto;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--main-success-button-color);
+    padding: 7px;
+}
+  
+.success {
+    color: var(--main-success-button-color);
+}
+  
+.error {
+    color: var(--main-error-button-color);
+}
+
+.new-watch-btn {
+    --t: 7.5px;
+    /* Thickness */
+    --l: 70px;
+    /* size of the symbol */
+    --s: 15px;
+    /* space around the symbol */
+    --c1: #fff;
+    /* Plus color*/
+    --c2: var(--main-new-button-color);
+    /* background color*/
+  
+    position: absolute;
+    top: 3.5rem;
+    left: 0.5rem;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    display: inline-block;
+    width: var(--l);
+    height: var(--l);
+    padding: var(--s);
+    box-sizing: border-box;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  
+    background:
+      linear-gradient(var(--c1) 0 0) content-box,
+      linear-gradient(var(--c1) 0 0) content-box,
+      var(--c2);
+    background-position: center;
+    background-size: 100% var(--t), var(--t) 100%;
+    background-repeat: no-repeat;
+    border-radius: 2.5px;
+}
+
+.new-watch-cancel-btn {
+    --t: 5px;
+    /* Thickness */
+    --l: 50px;
+    /* size of the symbol */
+    --s: 12.5px;
+    /* space around the symbol */
+    --c1: #fff;
+    /* Plus color*/
+    --c2: var(--main-error-button-color);
+    /* background color*/
+  
+    position: absolute;
+    top: -1rem;
+    right: -3rem;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    display: inline-block;
+    width: var(--l);
+    height: var(--l);
+    padding: var(--s);
+    box-sizing: border-box;
+    
+    background:
+      linear-gradient(var(--c2) 0 0) content-box,
+      linear-gradient(var(--c2) 0 0) content-box;
+    background-position: center;
+    background-size: 100% var(--t), var(--t) 100%;
+    background-repeat: no-repeat;
+    transform: rotate(45deg);
+}
+
+.new-watch-form {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    margin: 25px auto;
+    width: 800px;
+    padding: 25px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+}
+  
+.new-watch-form-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    position: relative;
+    height: 500px;
+}
+  
+.new-watch-form-column-item {
+    display: flex;
+    width: 330px;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.new-watch-form-column-item > label {
+    font-size: 14px;
+}
+
+#Name, #Type, #Price, #Brand, #Weight, #MaterialType, #Color, #WristSize, #DialWatchType, #CollectionName, #Mechanism, #Stock, #Image, #Description {
+    border: 0;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+    padding: 5px 15px;
+    width: 250px;
+    height: 27.5px;
+}
+  
+
+.new-watch-form-btn {
+    position: relative;
+}
+
+.new-watch-form-btn {
+    background-color: var(--main-success-button-color);
+    border: 1px solid var(--main-success-button-color);
+    text-transform: uppercase;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, .1) 0 2px 4px 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    letter-spacing: 2px;
+    font-size: 16px;
+    font-weight: 400;
+    outline: none;
+    outline: 0;
+    display: block;
+    padding: 10px 25px;
+    margin-top: 35px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    text-align: center;
+    transform: translateY(0);
+    transition: transform 150ms, box-shadow 150ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 125px;
+    height: 45px;
+}
+  
+.new-watch-form-btn:hover {
+    transform: translateY(-1.5px);
+}

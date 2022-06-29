@@ -1,0 +1,26 @@
+:root {
+    --main-page-background-color: #31708E;
+    --main-page-font-color: #333;
+}
+
+.page-button {
+    background: none;
+    color: var(--main-page-font-color);
+    padding: 5px;
+    margin: 0 15px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    outline: inherit;
+    display: block;
+    height: 50px;
+    width: 125px;
+    border-radius: 27.5px;
+    border: 2px solid var(--main-page-background-color);
+}
+  
+/* Change style if the next page is loaded, fill button for active page */
+.page-button:hover {
+    color: #fff;
+    background-color: var(--main-page-background-color);
+}

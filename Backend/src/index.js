@@ -1,35 +1,97 @@
 // Dependencies
 const express = require("express");
 const app = express();
-const mysql = require('mysql');
-const cors = require('cors');
+const cors = require("cors");
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-const db = mysql.createPool({
-  host: 'remotemysql.com',
-  user: 'owlR9qNmhw',
-  password: 'Giy7LuE5Ys',
-  database: 'owlR9qNmhw'
-})
 app.use(cors());
+app.use(express.urlencoded({ extended: true }));
+require("dotenv").config({ path: "../.env" });
+const shop = require("./services/shop");
 
-app.get("/api/get", (req, res) => {
-  const sqlRequest = "SELECT * FROM Watches;"
-  // const sqlRequest = "INSERT INTO Logement (adresse, nomProprio,type,nbPieces,superficie,etat,prix, dateDispo, ville, nbGarages) VALUES ('25 rue de chaipakoa', 'jessy', 'maison',3, 123, 'neuf', 1000000, '2022-05-12', 'chelles', 2);";
-  db.query(sqlRequest, (err, result) =>{
-      if(err) {
-          console.log(err);
-          res.send(err.toString()); 
-       }
-       else{
-       res.json(result);
-       console.log(result[0].price);}
-      
-  });
-})
 
-const PORT = 8000;
+// Used for logging purposes
+const requestLogger = (request, response, next) => {
+  console.log("Method:", request.method);
+  console.log("Path:", request.path);
+  console.log("Body:", request.body);
+  console.log("---------------------");
+  next();
+};
+
+app.use(requestLogger);
+
+// Used to display the errors and the their message
+app.use((error, request, response, next) => {
+  const statusCode = error.statusCode || 500;
+  console.error(error.message, error.stack);
+  response.status(statusCode).json({ message: error.message });
+  return;
+});
+
+app.get("/api/shop/basket", async (request, response, next) => {
+  try{
+    response.json(await shop.getBasket());
+  } catch(error){
+    console.log('Error while getting basket', error.message);
+    next(error);
+  }
+});
+
+// GET endpoint used to retrieve the total number of watches
+app.get("/api/shop/quantity", async (request, response, next) => {
+  try {
+    response.json(await shop.getQuantity());
+  } catch (error) {
+    console.log(
+      `Error while getting total number of watches `,
+      error.message
+    );
+    next(error);
+  }
+});
+
+// GET endpoint used to retrieve the list of all the watches
+app.get("/api/shop", async (request, response, next) => {
+  try {
+    response.json(await shop.getAll(request.query.page));
+  } catch (error) {
+    console.error(`Error while getting watches `, error.message);
+    next(error);
+  }
+});
+
+// POST endpoint used to add a new watch to the shop
+app.post("/api/shop", async (request, response, next) => {
+  try {
+    response.json(await shop.add(request.body));
+  } catch (error) {
+    console.error(`Error while adding watch `, error.message);
+    next(error);
+  }
+});
+
+// PUT endpoint used to update/alter watch's informations
+app.put("/api/shop/:id", async (request, response, next) => {
+  try {
+    console.log(request.body);
+    response.json(await shop.modify(request.params.id, request.body));
+  } catch (error) {
+    console.error(`Error while modifying watch `, error.message);
+    next(error);
+  }
+});
+
+// DELETE endpoint used to remove the specific watch from the store
+app.delete("/api/shop/:id", async (request, response, next) => {
+  try {
+    response.json(await shop.remove(request.params.id));
+  } catch (error) {
+    console.error(`Error while removing a watch `, error.message);
+    next(error);
+  }
+});
+
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

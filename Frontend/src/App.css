@@ -1,24 +1,19 @@
+:root {
+  --main-background-color: #F7F7F7;
+  --main-success-button-color: #438945;
+  --main-error-button-color: #E40C2B;
+  --main-new-button-color: #ABF62D;
+  --main-icon-color: #1D2228;
+}
+
 .App {
   /* text-align: center; */
   margin: 0;
   padding: 0;
-  padding-top: 6%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
   font-family: 'Poppins', sans-serif;
-  background: #E3E2DF;
-  /* background-image: url('https://images.unsplash.com/photo-1506619216599-9d16d0903dfd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1769&q=80') */
-}
-
-body{
-  background-image: url('https://images.unsplash.com/photo-1458682625221-3a45f8a844c7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1674&q=80');
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
-  object-fit: cover;
+  background: var(--main-background-color);
+  overflow: auto;
 }
 
 .App-logo {
@@ -54,4 +49,18 @@ body{
   to {
     transform: rotate(360deg);
   }
+}
+
+ul {
+  list-style-type: none;
+  margin: 35px 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+ul > li {
+  display: inline-block;
 }

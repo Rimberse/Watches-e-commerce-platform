@@ -1,0 +1,2 @@
+INSERT INTO Watches (Name, Type, Price, Brand, Weight, MaterialType, Color, WristSize, DialWatchType, CollectionName, Mechanism, Stock, Description, Image)
+VALUES ('Coutourier', 'Mechanical', 599.99, 'Tissot', 7.15, 'Metal', 'Silver', 3, 'Large', 'Regular', 'Tissot', 3, 'Great watch. Great build & quality.', 'https://www.tissotwatches.com/media/catalog/product/cache/aaadd316e453df5b08f7f4246fad1a9c/T/0/T035.627.16.051.00_R_1.png');
