@@ -11,7 +11,6 @@ const App = () => {
     <div>
     <Navbar></Navbar>
     </div>
-    
     <div className="App">
       <Watches />
     </div>

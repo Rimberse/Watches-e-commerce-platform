@@ -6,6 +6,7 @@ import { Button } from '../Button';
 import {VscThreeBars} from 'react-icons/vsc'
 
 const Nav = styled.nav`
+    background-color: #2C2D2D;
     height: 60px;
     display: flex;
     justify-content: space-between;
@@ -13,7 +14,7 @@ const Nav = styled.nav`
     z-index: 100;
     position: fixed;
     width: 100%;
-    background: linear-gradient(grey, #E3E2DF)
+
 `;
 
 const NavLink = css`
@@ -24,17 +25,20 @@ padding: 0 1rem;
 height: 100%;
 cursor: pointer;
 text-decoration: none
+
 `
 
 const Logo = styled(Link)`
     ${NavLink};
     font-style: italic;
     font-size: 32px;
-    padding-top: 4px;
+    padding-top: 2px;
+
 `;
 
 const MenuBars = styled(VscThreeBars)`
 display: none;
+
 // le bouton s'affiche tant que la fenetre ne dépasse pas 768px de large
 @media screen and (max-width: 768px) {
     display: block;
@@ -54,7 +58,9 @@ const NavMenu = styled.div`
 display: flex;
 align-items: center;
 margin-right: -48px;
-padding-top: 15px;
+padding-top: 5px;
+
+
 @media screen and (max-width: 768px) {
     display: none;
 }
@@ -64,13 +70,14 @@ const NavBtn = styled.div`
 display: flex;
 align-items: center;
 margin-right: 24px;
-padding-top: 15px;
+padding-top: 5px;
 @media screen and (max-width: 768px) {
     display: none;
 }
 `;
 
 const NavMenuLinks = styled.div`
+
 color: #fff;
 display: flex;
 align-items: center;
@@ -79,15 +86,16 @@ height: 40px;
 cursor: pointer;
 &:hover{
     transition: 0.5s;
-    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    transform: scale(1.05);
+    color: #FC922E;
+    
 }
 `
 
 const Navbar = ({toggle}) => {
   return (
     <Nav>
-
-        <Logo to="/">WATCHES</Logo>
+        <Logo to="/">WebShop </Logo>
         <MenuBars onClick={toggle}/>
         <NavMenu>
             {menuData.map((item, index) => (

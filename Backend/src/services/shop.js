@@ -18,7 +18,13 @@ const getBasket = async () => {
         `SELECT * FROM Basket`
     );
     return sqlRequest;
+}
 
+const getLogs = async () => {
+    const sqlRequest = await db.query(
+        `SELECT Customer.FirstName, Watches.Name, Watches.Image, Watches.Price FROM Customer, Transaction, Watches WHERE Customer.IdCustomer = Transaction.CustomerId AND Watches.IdWatches = Transaction.WatchesId`
+    );
+    return sqlRequest;
 }
 
 
@@ -95,5 +101,6 @@ module.exports = {
     add,
     modify,
     remove,
-    getBasket
+    getBasket,
+    getLogs
 }

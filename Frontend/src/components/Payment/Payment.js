@@ -4,6 +4,7 @@ import PaypalCheckoutButton from '../PaypalCheckoutButton'
 import "./style.css";
 import axios from 'axios';
 
+
 const Payment = () => {
   const [data, setData] = useState(null);
     
@@ -20,6 +21,7 @@ const Payment = () => {
 
     loadData();
   }, []);
+
 
 
     let total = 0;
@@ -46,7 +48,7 @@ const Payment = () => {
   
     return (
       <body>
-  <div className='title'>
+        <div className='title'>
           <h1 className='payment'>Payment</h1>
           <p className='pay-with-paypal'>Pay with PayPal</p>
           <br/>
@@ -59,12 +61,13 @@ const Payment = () => {
           return actions.order.create({
             purchase_units: [{
               amount: {
-                value: total
+                value: 10
               }
             }]
           })
         }
         else{
+          
           console.log("Nothing found in the basket.")
         }
         
@@ -80,6 +83,7 @@ const Payment = () => {
           </div>
       </div>
       </body>
+    
       
     )
     }
