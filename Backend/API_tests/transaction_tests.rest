@@ -1,0 +1,10 @@
+POST http://localhost:5000/api/transaction
+Content-Type: application/json
+
+{
+    "transactions": [
+        {"CustomerId": 1, "WatchesId": 13, "quantity": 5},
+        {"CustomerId": 1, "WatchesId": 14, "quantity": 3},
+        {"CustomerId": 1, "WatchesId": 15, "quantity": 1}
+    ]
+}
