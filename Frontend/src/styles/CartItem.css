@@ -1,0 +1,117 @@
+.item {
+    width: 80%;
+    height: 125px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 7px auto;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+}
+
+.image {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35%;
+    height: 100%;
+    background: var(--card-background-color);
+    transition: .3s linear;
+    overflow: hidden;
+}
+
+.image img {
+    position: relative;
+    width: 155px;
+    transform: rotate(-30deg);
+    transition: .9s linear;
+}
+
+.details {
+    width: 42.5%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 15px;
+}
+
+.details-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--card-header-name-color);
+}
+
+.details-brand {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--card-header-brand-color);
+}
+
+.details-quantity {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.details-quantity-decrease, .details-quantity-increase {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    font-size: 26px;
+    color: #fff;
+    font-weight: 800;
+    padding: 2.5px;
+    border-radius: 5px;
+}
+
+.details-quantity-count {
+    width: 50px;
+    height: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+}
+
+.details-quantity-decrease {
+    background-color: var(--main-error-button-color);
+}
+
+.details-quantity-decrease:after {
+    content: '\2212';
+}
+
+.details-quantity-increase {
+    background-color: var(--main-success-button-color);
+}
+
+.details-quantity-increase:after {
+    content: '\002B';
+}
+
+.price {
+    width: 22.5%;
+    height: 75%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    color: var(--card-header-price-color);
+}
