@@ -2,14 +2,17 @@ import React, { useState, useEffect } from 'react';
 import CartItem from './CartItem';
 import "../styles/Cart.css";
 import { AiOutlineShopping } from 'react-icons/ai';
+import transaction from '../services/transaction';
 
-const Cart = ({ user, watch, contents }) => {
+const Cart = ({ user, userID, watch, contents }) => {
     // Cart contents
     const [items, setItems] = useState([]);
     // Cart item quantity
     const [itemQuantity, setItemQuantity] = useState(0);
     // Controls cart's visibility (if it's displayed or not)
     const [displayCart, setDisplayCart] = useState(false);
+    // An alert indicating whether the purchase has been made successfully
+    const [message, setMessage] = useState('');
 
     // Re-render the components each time the cart's contents changes
     useEffect(() => {
@@ -114,13 +117,36 @@ const Cart = ({ user, watch, contents }) => {
         }
     
         // Otherwise, redirect the client to payment page (via Paypal) & store the transaction informations to db if payment has been made successfully
+        const transactionInfo = {
+            transactions: []
+        };
 
+        // Store information about each item in cart
+        items.filter(item => item.quantity > 0).forEach(item => {
+            const transaction = {
+                CustomerId: userID,
+                WatchesId: item.watch.IdWatches,
+                quantity: item.quantity
+            };
+
+            transactionInfo.transactions.push(transaction);
+        })
+
+        // Once the transaction has been made, empty the cart, display an alert and close the cart
+        transaction.store(transactionInfo)
+            .then(response => {
+                emptyCart();
+                setDisplayCart(!displayCart);
+                setMessage(response.message);
+                setTimeout(() => setMessage(''), 3000);
+            });
     }
 
     // Renders cart items based on cart content. For each cart item renders CartItem component, representing a small piece of information, concering a watch: name, brand, image & price. CartItem component gets rerendered each time quantity changes.
     // Quantity of the items could de increased of decreased using provided button in CartItem. If user tries to decrease quantity beyond 1, cart item gets removed from the cart and no longer displayed (hence why .filter is used before .map function)
     return(
         <>
+            {(!displayCart && user === 'Client' && message !== '') && <p className='cart-alert'>{ message }</p>}
             {(!displayCart && user === 'Client') && <div className='cart-preview'>
                 <button className='cart-preview-icon' onClick={changeCartVisibility}><AiOutlineShopping /></button>
                 <div className='cart-preview-items'>{ items.filter(item => item.quantity > 0).length }</div>

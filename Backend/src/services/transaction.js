@@ -15,15 +15,14 @@ const store = async transactions => {
     });
 
     // Get rid of the last comma and insert semicolon
-    query = query.substring(0, query.length - 1);
-    query += ';';
+    query = query.substring(0, query.length - 1) + ';';
 
     const result = await db.query(query);
 
     let message = 'An attempt to store the transaction has failed';
 
     if (result.affectedRows) {
-        message = 'Transaction history has been saved successfully!';
+        message = 'Order complete. Transaction has been paid successfully!';
     }
 
     return { message };

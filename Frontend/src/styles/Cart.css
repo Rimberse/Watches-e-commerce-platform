@@ -9,6 +9,15 @@
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
+.cart-alert {
+    font-size: 28px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    color: var(--main-success-button-color);
+    margin: 25px auto;
+    text-align: center;
+}
+
 .cart-contents {
     height: 75%;
     overflow-y: scroll;

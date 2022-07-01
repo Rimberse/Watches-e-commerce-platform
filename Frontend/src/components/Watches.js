@@ -58,7 +58,7 @@ const Watches = () => {
     return (
         <div className='store'>
             <WatchForm user={"Admin"} />
-            <Cart watch={cart[cart.length - 1]} contents={cart} user={'Client'} />
+            <Cart watch={cart[cart.length - 1]} contents={cart} user={'Client'} userID={1} />
             <ul>
                 {watches.map(watch => <li key={watch.IdWatches}><Card watch={watch} user={"Admin"} reflectChanges={refresh} addToCart={() => { console.log(watch); addToCart(watch) } } /></li>)}
             </ul>
