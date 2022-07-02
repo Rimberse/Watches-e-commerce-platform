@@ -1,3 +1,7 @@
+.store {
+    position: relative;
+}
+
 .pagination-bar {
     display: flex;
     justify-content: center;

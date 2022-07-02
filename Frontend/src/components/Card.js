@@ -5,7 +5,7 @@ import { BsTrash } from 'react-icons/bs';
 import WatchForm from './WatchForm';
 import shopService from '../services/shop';
 
-const Card = ({ user, watch, reflectChanges }) => {
+const Card = ({ user, watch, reflectChanges, addToCart }) => {
   const [message, setMessage] = useState('');
   const [edit, setEdit] = useState(false);
   const btnRef = useRef();
@@ -52,7 +52,7 @@ const Card = ({ user, watch, reflectChanges }) => {
                 <p className='watch-card-details-info-description'>{ watch.Description }</p>
                 <div className='watch-card-details-info-bottom'>
                   <h3 className='watch-card-details-info-price'>{ formatter.format(watch.Price) }</h3>
-                  <button className='watch-card-details-info-cart'>Add to cart</button>
+                  <button className='watch-card-details-info-cart' onClick={addToCart}>Add to cart</button>
                 </div>
             </div>
           </div>

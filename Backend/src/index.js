@@ -55,7 +55,7 @@ app.get("/api/shop/quantity", async (request, response, next) => {
   try {
     response.json(await shop.getQuantity());
   } catch (error) {
-    console.log(
+    console.error(
       `Error while getting total number of watches `,
       error.message
     );
@@ -86,7 +86,6 @@ app.post("/api/shop", async (request, response, next) => {
 // PUT endpoint used to update/alter watch's informations
 app.put("/api/shop/:id", async (request, response, next) => {
   try {
-    console.log(request.body);
     response.json(await shop.modify(request.params.id, request.body));
   } catch (error) {
     console.error(`Error while modifying watch `, error.message);
@@ -103,6 +102,16 @@ app.delete("/api/shop/:id", async (request, response, next) => {
     next(error);
   }
 });
+
+// POST endpoint used to store client's purchase informations. Used to store transaction history
+app.post('/api/transaction', async (request, response, next) => {
+  try {
+    response.json(await transaction.store(request.body.transactions));
+  } catch(error) {
+    console.error(`Error while storing transaction informations `, error.message);
+    next(error);
+  }
+})
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {

@@ -27,9 +27,10 @@
     --c2: var(--main-new-button-color);
     /* background color*/
   
-    position: relative;
-    top: 3.5rem;
-    left: 0.5rem;
+
+    position: absolute;
+    top: 0.5rem;
+    left: 0.75rem;
     border: none;
     outline: none;
     cursor: pointer;
@@ -48,6 +49,7 @@
     background-size: 100% var(--t), var(--t) 100%;
     background-repeat: no-repeat;
     border-radius: 2.5px;
+    z-index: 10;
 }
 
 .watch-form{
