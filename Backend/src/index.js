@@ -7,6 +7,8 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 require("dotenv").config({ path: "../.env" });
 const shop = require("./services/shop");
+const transaction = require("./services/transaction");
+const basket = require("./services/basket");
 
 
 // Used for logging purposes
@@ -29,9 +31,9 @@ app.use((error, request, response, next) => {
 });
 
 // Used to get basket
-app.get("/api/shop/basket", async (request, response, next) => {
+app.get("/api/basket", async (request, response, next) => {
   try{
-    response.json(await shop.getBasket());
+    response.json(await basket.getBasket());
   } catch(error){
     console.log('Error while getting basket', error.message);
     next(error);
@@ -39,9 +41,9 @@ app.get("/api/shop/basket", async (request, response, next) => {
 });
 
 // Used to get transaction logs
-app.get("/api/shop/logs", async (request, response, next) => {
+app.get("/api/transactions", async (request, response, next) => {
   try{
-    response.json(await shop.getLogs());
+    response.json(await transaction.getAll());
   } catch(error){
     console.log('Error while getting logs', error.message);
     next(error);

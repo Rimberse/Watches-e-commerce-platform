@@ -1,8 +1,7 @@
 import React from 'react'
 import styled, {css} from 'styled-components/macro'
 import {Link } from 'react-router-dom' 
-import { menuData } from '../../data/MenuData';
-import { Button } from '../Button';
+import { Button } from './Button';
 import {VscThreeBars} from 'react-icons/vsc'
 
 const Nav = styled.nav`
@@ -90,7 +89,13 @@ cursor: pointer;
     color: #FC922E;
     
 }
-`
+`;
+
+const menuData = [
+    {title: 'About', link: '/about'},
+    {title: 'Products', link: '/products'},
+    {title: 'Docs', link: '/docs'}
+]
 
 const Navbar = ({toggle}) => {
   return (

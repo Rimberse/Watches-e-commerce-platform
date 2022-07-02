@@ -1,7 +1,7 @@
 import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js'
 import React, { useEffect, useState } from 'react'
-import PaypalCheckoutButton from '../PaypalCheckoutButton'
-import "./style.css";
+import PaypalCheckoutButton from './PaypalCheckoutButton'
+import "../styles/Payment.css"
 import axios from 'axios';
 
 
@@ -11,7 +11,7 @@ const Payment = () => {
   useEffect(() => {
     const loadData = async () => {
         try{
-            const response = await axios.get("http://localhost:5000/api/shop/basket");
+            const response = await axios.get("http://localhost:5000/api/basket");
             setData(response);
 
         } catch (error){
@@ -47,7 +47,7 @@ const Payment = () => {
   
   
     return (
-      <body>
+      <body className="payment-body">
         <div className='title'>
           <h1 className='payment'>Payment</h1>
           <p className='pay-with-paypal'>Pay with PayPal</p>

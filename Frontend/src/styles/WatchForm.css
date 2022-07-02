@@ -50,6 +50,10 @@
     border-radius: 2.5px;
 }
 
+.watch-form{
+    padding-top: 3%;
+}
+
 .new-watch-cancel-btn {
     --t: 5px;
     /* Thickness */

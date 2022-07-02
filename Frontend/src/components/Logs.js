@@ -1,8 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Paper } from '@material-ui/core'
-import './style.css';
-import Card from '../Card';
+import '../styles/Logs.css';
+import Card from './Card';
 
 const Logs = () => {
     const [data, setData] = useState(null);
@@ -10,7 +10,7 @@ const Logs = () => {
     useEffect(() => {
       const loadData = async () => {
           try{
-              const response = await axios.get("http://localhost:5000/api/shop/logs");
+              const response = await axios.get("http://localhost:5000/api/transactions");
               setData(response);
   
           } catch (error){
@@ -29,7 +29,7 @@ const Logs = () => {
     }
     else{
         return (
-            <>
+            <body className="logs-body">
             <h1 className='transaction-title'>Transaction logs</h1>
             <h3 className='transaction-separator'>_________________________________________________________________________________________</h3>
             <div>{data.data.map(elem => {
@@ -51,7 +51,7 @@ const Logs = () => {
           )
         }
         </div>
-            </>
+            </body>
                 
             
           )
