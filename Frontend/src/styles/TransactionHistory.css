@@ -1,0 +1,8 @@
+.Transaction-history-header {
+    font-size: 38px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    text-align: center;
+    margin: 25px auto;
+    color: var(--main-icon-color);
+}
