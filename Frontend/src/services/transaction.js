@@ -3,6 +3,13 @@ import config from '../config';
 
 const baseUrl = config.backend.baseUrl + '/transaction';
 
+const retrieve = page => {
+    const queryString = `?page=${page}`;
+    const request = axios.get(baseUrl + queryString);
+
+    return request.then(response => response.data);
+}
+
 const store = payload => {
     const config = {
         headers: {
@@ -15,7 +22,8 @@ const store = payload => {
 }
 
 const transactionService = {
-   store
+    retrieve,
+    store
 };
 
 export default transactionService;

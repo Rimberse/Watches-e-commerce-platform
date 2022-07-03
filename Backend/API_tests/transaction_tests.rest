@@ -1,3 +1,6 @@
+GET http://localhost:5000/api/transaction
+
+###
 POST http://localhost:5000/api/transaction
 Content-Type: application/json
 

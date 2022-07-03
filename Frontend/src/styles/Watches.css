@@ -5,4 +5,5 @@
 .pagination-bar {
     display: flex;
     justify-content: center;
+    margin: 25px auto;
 }

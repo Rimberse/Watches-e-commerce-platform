@@ -1,0 +1,63 @@
+.Transaction-history {
+    width: 80%;
+    margin: 25px auto;
+}
+
+.transaction-list {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.transaction-element {
+    width: 100%;
+}
+
+.Transaction-history-header {
+    font-size: 42px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 50px auto;
+    color: var(--main-icon-color);
+}
+
+.Transaction-history-columns {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 55px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+
+.Transaction-history-columns-product {
+    width: 50%;
+}
+
+.Transaction-history-columns-client {
+    width: 40%;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+}
+
+.Transaction-history-columns-quantity {
+    width: 10%;
+}
+
+.Transaction-history-columns-product, .Transaction-history-columns-client, .Transaction-history-columns-quantity {
+    box-sizing: border-box;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

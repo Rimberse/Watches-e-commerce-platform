@@ -81,6 +81,16 @@ app.delete("/api/shop/:id", async (request, response, next) => {
   }
 });
 
+// GET endpoint used to retrieve the list of all transaction (client's purchases). Includes informations related to watches, client and ordered quantity
+app.get("/api/transaction", async (request, response, next) => {
+  try {
+    response.json(await transaction.getAll(request.query.page));
+  } catch (error) {
+    console.error(`Error while getting transaction informations `, error.message);
+    next(error);
+  }
+});
+
 // POST endpoint used to store client's purchase informations. Used to store transaction history
 app.post('/api/transaction', async (request, response, next) => {
   try {
