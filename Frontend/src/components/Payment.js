@@ -1,9 +1,7 @@
 import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js'
 import React, { useEffect, useState } from 'react'
-import PaypalCheckoutButton from './PaypalCheckoutButton'
 import "../styles/Payment.css"
 import axios from 'axios';
-import  Cart  from './Cart.js'
 
 const Payment = ({totalprice}) => {
   const [data, setData] = useState(null);
@@ -22,68 +20,59 @@ const Payment = ({totalprice}) => {
     loadData();
   }, []);
 
+  let total = totalprice
+  console.log(totalprice); 
 
-
-    let total = totalprice
-    console.log(totalprice);
-    
-
-    if(data == null){
-      return(
-        <h1>Page loading ...</h1>
-      )
-    }
-    else{
-
-      const calcTotal = () => {
-        data.data.forEach(elem => {
-          total += elem.Price
-          console.log(total)
-        })
-        // Round cause paypal won't take too many numbers
-        total = Math.round(total)
-      }
+  if(data == null){
+    return(
+      <h1>Page loading ...</h1>
+    )
+  } else{
+    const calcTotal = () => {
+      data.data.forEach(elem => {
+        total += elem.Price
+        console.log(total)
+      })
       
-      calcTotal();
-  
+      // Round cause paypal won't take too many numbers
+      total = Math.round(total)
+    }
+      
+    calcTotal();
   
     return (
-      <body className="payment-body">
+      <div className="payment-body">
         <div className='title'>
           <h1 className='payment'>Payment</h1>
           <p className='pay-with-paypal'>Pay with PayPal</p>
           <br/>
           <div className="paypal-button-container">
-          <PayPalScriptProvider options={{"client-id":process.env.REACT_APP_PAYPAL_CLIENT_ID}}>
-        <PayPalButtons createOrder={function(data, actions) {
-          
-        // Set up the transaction
-          return actions.order.create({
-            purchase_units: [{
-              amount: {
-                value: 500
-              }
-            }]
-          })
-        }}
-        onApprove={function(data, actions) {
-          // This function captures the funds from the transaction.
-          return actions.order.capture().then(function(details) {
-            // This function shows a transaction success message to your buyer.
-            alert('Transaction completed by ' + details.payer.name.given_name);
-          });
-        }} ></PayPalButtons>
-      </PayPalScriptProvider>
+            <PayPalScriptProvider options={{"client-id": process.env.REACT_APP_PAYPAL_CLIENT_ID}}>
+            <PayPalButtons createOrder={function(data, actions) {
+            
+              // Set up the transaction
+              return actions.order.create({
+                purchase_units: [{
+                  amount: {
+                    value: 500
+                  }
+                }]
+              })
+            }}
+
+            onApprove={function(data, actions) {
+              // This function captures the funds from the transaction.
+              return actions.order.capture().then(function(details) {
+                // This function shows a transaction success message to your buyer.
+                alert('Transaction completed by ' + details.payer.name.given_name);
+              });
+            }} ></PayPalButtons>
+            </PayPalScriptProvider>
           </div>
+        </div>
       </div>
-      </body>
-    
-      
     )
-    }
-    
+  } 
 }
 
-
-
-export default Payment
+export default Payment;
