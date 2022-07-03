@@ -5,6 +5,8 @@ import Navbar from './components/Navbar'
 import { Route, Routes } from 'react-router-dom';
 import Payment from './components/Payment';
 import Logs from './components/Logs';
+import totalprice from './components/Cart';
+
 
 const App = () => {
   

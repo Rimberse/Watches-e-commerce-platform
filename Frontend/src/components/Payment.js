@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react'
 import PaypalCheckoutButton from './PaypalCheckoutButton'
 import "../styles/Payment.css"
 import axios from 'axios';
+import  Cart  from './Cart.js'
 
-
-const Payment = () => {
+const Payment = ({totalprice}) => {
   const [data, setData] = useState(null);
     
   useEffect(() => {
@@ -24,7 +24,8 @@ const Payment = () => {
 
 
 
-    let total = 0;
+    let total = totalprice
+    console.log(totalprice);
     
 
     if(data == null){
@@ -57,20 +58,13 @@ const Payment = () => {
         <PayPalButtons createOrder={function(data, actions) {
           
         // Set up the transaction
-        if(total != 0){
           return actions.order.create({
             purchase_units: [{
               amount: {
-                value: 10
+                value: 500
               }
             }]
           })
-        }
-        else{
-          
-          console.log("Nothing found in the basket.")
-        }
-        
         }}
         onApprove={function(data, actions) {
           // This function captures the funds from the transaction.
@@ -89,5 +83,7 @@ const Payment = () => {
     }
     
 }
+
+
 
 export default Payment
