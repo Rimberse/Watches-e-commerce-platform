@@ -10,7 +10,7 @@ const Transaction = ({ watch, client, quantity }) => {
         style: 'currency',
         currency: 'EUR'
     });
-
+    
     return(
         <>
             <div className='transaction'>
@@ -28,9 +28,11 @@ const Transaction = ({ watch, client, quantity }) => {
                     </div>
                 </div>
                 <div className='transaction-client'>
-                    <p className='transaction-client-firstName'>{ client.FirstName }</p>
-                    <p className='transaction-client-lastName'>{ client.LastName }</p>
-                    <p className='transaction-client-email'>{ client.email }</p>
+                    <img src="https://www.pngplay.com/wp-content/uploads/7/Customer-PNG-Photos.png" alt="Client" className='transaction-client-picture'></img>
+                    <div className='transaction-client-details'>
+                        <p className='transaction-client-name'>{ client.FirstName + ' ' + client.LastName }</p>
+                        <p className='transaction-client-email'>{ client.Email }</p>
+                    </div>
                 </div>
                 <h2 className='transaction-quantity'>{ quantity }</h2>
             </div>

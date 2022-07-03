@@ -2,21 +2,21 @@
     display: flex;
     justify-items: space-between;
     align-items: center;
-    flex-wrap: nowrap;
-}
-
-.transaction-watch {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    width: 600px;
+    width: 100%;
     height: 300px;
-    background: #fff;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
+.transaction-watch {
+    display: flex;
+    justify-content: space-between;
+    width: 50%; /* 50% 40% 10%*/
+    height: 100%;
+    background: #fff;
+    box-sizing: border-box;
+}
+
 .transaction-watch-image {
-    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -27,20 +27,8 @@
     overflow: hidden;
 }
 
-.transaction-watch-image:before {
-    content: 'Watch';
-    position: absolute;
-    top: 0px;
-    left: 14px;
-    color: var(--card-background-text);
-    opacity: 0.2;
-    font-size: 5em;
-    font-weight: 800;
-}
-
 .transaction-watch-image img {
-    position: relative;
-    width: 400px;
+    width: 375px;
     transform: rotate(-30deg);
     transition: .9s linear;
 }
@@ -80,16 +68,58 @@
     overflow: hidden; 
 }
 
-.transaction-watch-details-info-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
 .transaction-watch-details-info-price {
     margin: 0;
     padding: 0;
-    font-size: 2.5em;
+    font-size: 2.3em;
     color: var(--card-header-price-color);
     text-align: center;
+}
+
+.transaction-client {
+    width: 40%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 20px;
+    box-sizing: border-box;
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+}
+
+.transaction-client-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: var(--card-header-description-color);
+}
+
+.transaction-client-name {
+    text-transform: uppercase;
+}
+
+.transaction-client-picture {
+    width: 150px;
+    height: 150px;
+}
+
+.transaction-quantity {
+    width: 10%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 38px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    background-color: #fff;
+    padding: 20px;
+    box-sizing: border-box;
+    color: var(--card-header-description-color);
 }
