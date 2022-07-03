@@ -7,7 +7,8 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 require("dotenv").config({ path: "../.env" });
 const shop = require("./services/shop");
-const transaction = require('./services/transaction');
+const transaction = require("./services/transaction");
+const basket = require("./services/basket");
 
 
 // Used for logging purposes

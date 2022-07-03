@@ -52,6 +52,10 @@
     z-index: 10;
 }
 
+.watch-form{
+    padding-top: 3%;
+}
+
 .new-watch-cancel-btn {
     --t: 5px;
     /* Thickness */

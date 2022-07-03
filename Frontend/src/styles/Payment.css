@@ -1,5 +1,6 @@
 .title{
     padding-top: 10%;
+    
     text-align: center;
     color: #fff;
     text-shadow: 1px 1px 8px black;
@@ -7,7 +8,12 @@
     /*font-family: "Montserrat";*/
 }
 
+<<<<<<< HEAD:Frontend/src/styles/Payment.css
 body{
+=======
+.payment-body{
+  height: 100vh;
+>>>>>>> 00af52b1f08b9e37fb9555fb92e9430ea6786012:Frontend/src/components/Payment/style.css
   background-image: url('https://images.unsplash.com/photo-1508057198894-247b23fe5ade?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80');
   background-repeat: no-repeat;
   background-attachment: fixed;
