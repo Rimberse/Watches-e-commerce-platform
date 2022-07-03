@@ -4,6 +4,7 @@ import Watches from './components/Watches';
 import Payment from './components/Payment';
 import TransactionHistory from './components/TransactionHistory';
 import './App.css';
+import Payment from './components/Payment';
 
 const App = () => {
   

@@ -27,6 +27,7 @@
     --c2: var(--main-new-button-color);
     /* background color*/
   
+
     position: absolute;
     top: 0.5rem;
     left: 0.75rem;
@@ -49,6 +50,10 @@
     background-repeat: no-repeat;
     border-radius: 2.5px;
     z-index: 10;
+}
+
+.watch-form{
+    padding-top: 3%;
 }
 
 .new-watch-cancel-btn {

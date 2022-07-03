@@ -7,7 +7,7 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 require("dotenv").config({ path: "../.env" });
 const shop = require("./services/shop");
-const transaction = require('./services/transaction');
+const transaction = require("./services/transaction");
 
 // Used for logging purposes
 const requestLogger = (request, response, next) => {
@@ -99,7 +99,7 @@ app.post('/api/transaction', async (request, response, next) => {
     console.error(`Error while storing transaction informations `, error.message);
     next(error);
   }
-})
+});
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
