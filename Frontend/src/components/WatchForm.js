@@ -67,7 +67,7 @@ const WatchForm = ({ user, watch, reflectChanges }) => {
   };
 
   return (
-    <>
+    <div className="watch-form">
       {(message !== '') &&
         <h2 className={"status-message " + (message !== "Please fill in the form correctly!" ? "success" : "error")}>{message}</h2>}
       {!showForm && user === 'Admin' && <button onClick={displayPropertyForm} className="new-watch-btn"></button>}
@@ -140,7 +140,7 @@ const WatchForm = ({ user, watch, reflectChanges }) => {
             </div>}
           </div>
         </form>}
-    </>
+    </div>
   );
 };
 

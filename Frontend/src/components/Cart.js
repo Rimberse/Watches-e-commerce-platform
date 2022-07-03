@@ -3,6 +3,8 @@ import CartItem from './CartItem';
 import "../styles/Cart.css";
 import { AiOutlineShopping } from 'react-icons/ai';
 import transaction from '../services/transaction';
+import Payment from './Payment';
+
 
 const Cart = ({ user, userID, watch, contents }) => {
     // Cart contents
@@ -113,14 +115,14 @@ const Cart = ({ user, userID, watch, contents }) => {
     const checkout = () => {
         // No checkout if cart is empty
         if (items.filter(item => item.quantity > 0).length <= 0) {
-            return;
+            return ;
         }
     
         // Otherwise, redirect the client to payment page (via Paypal) & store the transaction informations to db if payment has been made successfully
         const transactionInfo = {
             transactions: []
         };
-
+        
         // Store information about each item in cart
         items.filter(item => item.quantity > 0).forEach(item => {
             const transaction = {
@@ -140,11 +142,13 @@ const Cart = ({ user, userID, watch, contents }) => {
                 setMessage(response.message);
                 setTimeout(() => setMessage(''), 3000);
             });
+
     }
 
     // Renders cart items based on cart content. For each cart item renders CartItem component, representing a small piece of information, concering a watch: name, brand, image & price. CartItem component gets rerendered each time quantity changes.
     // Quantity of the items could de increased of decreased using provided button in CartItem. If user tries to decrease quantity beyond 1, cart item gets removed from the cart and no longer displayed (hence why .filter is used before .map function)
     return(
+
         <>
             {(!displayCart && user === 'Client' && message !== '') && <p className='cart-alert'>{ message }</p>}
             {(!displayCart && user === 'Client') && <div className='cart-preview'>
@@ -162,10 +166,11 @@ const Cart = ({ user, userID, watch, contents }) => {
                     <button className='cart-operations-empty' onClick={emptyCart}>Empty Cart</button>
                     <span className='cart-operations-total'>{ calculateTotal() }</span>
                 </div>
-                <button className='cart-checkout' onClick={checkout}>Checkout</button>
+                <button className='cart-checkout' onClick={checkout} to={<Payment totalprice={calculateTotal}/>} primary='true'>Checkout</button>
             </div>}
         </>
     );
-}
+    
+};
 
 export default Cart;
