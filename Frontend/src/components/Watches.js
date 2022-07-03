@@ -5,8 +5,9 @@ import WatchForm from './WatchForm';
 import Cart from './Cart';
 import shopService from '../services/shop';
 import '../styles/Watches.css';
+import Navbar from './Navbar';
 
-const Watches = () => {
+const Watches = ({ user }) => {
     const [watches, setWatches] = useState([]);
     const [page, setPage] = useState(Number(1));
     const lastPage = useRef(0);
@@ -56,18 +57,21 @@ const Watches = () => {
     }
     
     return (
-        <div className='store'>
-            <WatchForm user={"Admin"} />
-            <Cart watch={cart[cart.length - 1]} contents={cart} user={'Client'} userID={1} />
-            <ul>
-                {watches.map(watch => <li key={watch.IdWatches}><Card watch={watch} user={"Admin"} reflectChanges={refresh} addToCart={() => { console.log(watch); addToCart(watch) } } /></li>)}
-            </ul>
-        
-            <div className="pagination-bar">
-                <PageButton page={ '\u2190   Prev' } loadPage={ () => loadPrevPage() } isDisabled={ page > 1 ? false : true } />
-                <PageButton page={ 'Next   \u2192' } loadPage={ () => loadNextPage() } isDisabled={ page < lastPage.current ? false : true } />
+        <>
+            <Navbar user={user} />
+            <div className='store'>
+                <WatchForm user={"Admin"} />
+                <Cart watch={cart[cart.length - 1]} contents={cart} user={'Client'} userID={1} />
+                <ul>
+                    {watches.map(watch => <li key={watch.IdWatches}><Card watch={watch} user={"Admin"} reflectChanges={refresh} addToCart={() => { console.log(watch); addToCart(watch) } } /></li>)}
+                </ul>
+            
+                <div className="pagination-bar">
+                    <PageButton page={ '\u2190   Prev' } loadPage={ () => loadPrevPage() } isDisabled={ page > 1 ? false : true } />
+                    <PageButton page={ 'Next   \u2192' } loadPage={ () => loadNextPage() } isDisabled={ page < lastPage.current ? false : true } />
+                </div>
             </div>
-        </div>
+        </>
     );
 }
 

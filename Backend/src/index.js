@@ -29,26 +29,6 @@ app.use((error, request, response, next) => {
   return;
 });
 
-// Used to get basket
-app.get("/api/shop/basket", async (request, response, next) => {
-  try{
-    response.json(await shop.getBasket());
-  } catch(error){
-    console.log('Error while getting basket', error.message);
-    next(error);
-  }
-});
-
-// Used to get transaction logs
-app.get("/api/shop/logs", async (request, response, next) => {
-  try{
-    response.json(await shop.getLogs());
-  } catch(error){
-    console.log('Error while getting logs', error.message);
-    next(error);
-  }
-});
-
 // GET endpoint used to retrieve the total number of watches
 app.get("/api/shop/quantity", async (request, response, next) => {
   try {
@@ -110,7 +90,7 @@ app.post('/api/transaction', async (request, response, next) => {
     console.error(`Error while storing transaction informations `, error.message);
     next(error);
   }
-})
+});
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {

@@ -4,16 +4,13 @@
     color: #fff;
     text-shadow: 1px 1px 8px black;
     font-size: 28px;
-/*     
-     font-family: "Montserrat";  */
+    /*font-family: "Montserrat";*/
 }
 
 body{
-    background-image: url('https://images.unsplash.com/photo-1508057198894-247b23fe5ade?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80');
+  background-image: url('https://images.unsplash.com/photo-1508057198894-247b23fe5ade?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
   object-fit: cover;
-  
 }
-

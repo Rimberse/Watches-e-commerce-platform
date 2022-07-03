@@ -12,22 +12,6 @@ const getQuantity = async () => {
     return rows[0];
 }
 
-
-const getBasket = async () => {
-    const sqlRequest = await db.query(
-        `SELECT * FROM Basket`
-    );
-    return sqlRequest;
-}
-
-const getLogs = async () => {
-    const sqlRequest = await db.query(
-        `SELECT Customer.FirstName, Watches.Name, Watches.Image, Watches.Price FROM Customer, Transaction, Watches WHERE Customer.IdCustomer = Transaction.CustomerId AND Watches.IdWatches = Transaction.WatchesId`
-    );
-    return sqlRequest;
-}
-
-
 // Queries db and returns all watches
 const getAll = async (page = 1) => {
     const offset = helper.getOffset(page, config.listPerPage);
@@ -100,7 +84,5 @@ module.exports = {
     getAll,
     add,
     modify,
-    remove,
-    getBasket,
-    getLogs
+    remove
 }
