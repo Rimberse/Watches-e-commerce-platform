@@ -30,6 +30,5 @@ const store = async transactions => {
 
 
 module.exports = {
-    getAll,
     store
 }
