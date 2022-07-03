@@ -2,6 +2,32 @@ const db = require('./db');
 const helper = require('../helper');
 const config = require('../config');
 
+// Retrieves the list of transaction made by clients with ordered amount of items
+const getAll = async (page = 1) => {
+    const offset = helper.getOffset(page, config.listPerPage);
+    
+    const rows = await db.query(
+        `SELECT IdWatches, Name, Type, Price, Brand, Weight, MaterialType, Color, WristSize, DialWatchType, CollectionName, Mechanism, Stock, Image, Description, 
+        IdCustomer, FirstName, LastName, Email, COUNT(*) AS Quantity 
+        FROM Watches, Customer, Transaction 
+        WHERE
+            idWatches = WatchesId
+        AND 
+            IdCustomer = CustomerId
+        GROUP BY 
+            CustomerId, WatchesId HAVING COUNT(*) > 1
+        LIMIT ${offset}, ${config.listPerPage};`
+    );
+
+    const data = helper.emptyOrRows(rows);
+    const meta = { page };
+
+    return {
+        data,
+        meta
+    }
+}
+
 // Stores transaction information into db, once the purchase has been finalized
 const store = async transactions => {
     // Build the query using transaction array contents
@@ -29,5 +55,6 @@ const store = async transactions => {
 }
 
 module.exports = {
+    getAll,
     store
 }
