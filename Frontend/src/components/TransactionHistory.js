@@ -3,6 +3,7 @@ import '../styles/TransactionHistory.css';
 import transactionService from '../services/transaction';
 import Transaction from './Transaction';
 import PageButton from './PageButton';
+import Navbar from './Navbar';
 
 // Lets the admin to view number of purchases have been made by each client: Product information, quantity ordered, price, client
 const TransactionHistory = ({ user }) => {
@@ -49,6 +50,7 @@ const TransactionHistory = ({ user }) => {
 
     return(
         <>
+            <Navbar user={user} />
             <h1 className='Transaction-history-header'>Transaction history</h1>
             { user === "Admin" && <div className='Transaction-history'>
                 <div className='Transaction-history-columns'>
