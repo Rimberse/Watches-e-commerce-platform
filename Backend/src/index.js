@@ -2,12 +2,14 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const jwt = require("jsonwebtoken");
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 require("dotenv").config({ path: "../.env" });
 const shop = require("./services/shop");
 const transaction = require("./services/transaction");
+const authentication = require("./services/authentication");
 
 // Used for logging purposes
 const requestLogger = (request, response, next) => {
@@ -98,6 +100,50 @@ app.post('/api/transaction', async (request, response, next) => {
   } catch(error) {
     console.error(`Error while storing transaction informations `, error.message);
     next(error);
+  }
+});
+
+// POST user credentials for signing up. Used to create new users accounts
+app.post('/api/authentication/signup', async (req, res, next) => {
+  const {
+    email,
+    password: password_ok,
+    last_name: last_name,
+    first_name: first_name,
+  } = req.body;
+
+  if (!email || !password_ok)
+    return res.send({ message: "Please enter your email & password" });
+  else {
+    try {
+      const response = await authentication.createUser(
+        email,
+        password_ok,
+        last_name,
+        first_name
+      );
+
+      if (response.message === "Registered successfully") {
+        const user = JSON.parse(JSON.stringify(response));
+
+        const token = jwt.sign(user, "sljkfkectirerupâzaklndncwckvmàyutgri", {
+          expiresIn: 6000,
+        });
+
+        res.cookie("jwt", token, {
+          httpOnly: true,
+          secure: true,
+          sameSite: "none",
+        });
+
+        console.log(token);
+      }
+
+      res.send(response);
+    } catch (err) {
+      console.log(`Error while signing up user `, err.message);
+      next(err);
+    }
   }
 });
 
