@@ -38,7 +38,7 @@ const Footer = () => {
                 </div>
             </div>
             <h2>Made with <a href="https://imgur.com/r/cats" target="_blank" rel="noreferrer">❤️</a> by students of EFREI - Paris Panthéon-Assas University</h2>
-            <p>© 2022 Kerim Hudayberdiyev, Meryem Köse, Jessy Vy, Ratiba Kadi</p>
+            <p>© 2022 Kerim HUDAYBERDIEV, Meryem KÖSE, Jessy VY, Zain ZAFAR</p>
             <p>© All rights belong to their respective owners. We do not own any of this content (images, icons, etc.) </p>
         </footer>
     );
