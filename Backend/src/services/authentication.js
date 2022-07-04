@@ -6,7 +6,31 @@ const bcrypt = require("bcryptjs");
 // const bodyParser = require("body-parser");
 // const cookieParser = require("cookie-parser");
 
-//To create a new User with regex checking
+// Check user account :
+const getUser = async (email, password) => {
+    const rows = await db.query(`SELECT * FROM Customer WHERE Email="${email}"`);
+  
+    let message;
+  
+    if (!rows.length || !(await bcrypt.compare(password, rows[0].Password))) {
+      message = "Email/password incorrect";
+  
+      return {
+        message,
+      };
+    } else {
+      message = "User has been logged in";
+      return {
+        user_id: rows[0].IdCustomer,
+        user_first_name: rows[0].FirstName,
+        user_last_name: rows[0].LastName,
+        user_mail: rows[0].Email,
+        message,
+      };
+    }
+};
+
+// To create a new User with regex checking
 const createUser = async (email, password_ok, last_name, first_name) => {
     const rows = await db.query(`SELECT * FROM Customer WHERE Email="${email}"`);
     console.log("email: " + email);
@@ -51,5 +75,6 @@ const createUser = async (email, password_ok, last_name, first_name) => {
 };
 
 module.exports = {
+    getUser,
     createUser
 };

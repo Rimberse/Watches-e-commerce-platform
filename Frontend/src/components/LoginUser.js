@@ -2,14 +2,11 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Navbar from "./Navbar";
 import "../styles/LoginUser.css";
-import Axios from "axios";
 import { motion } from "framer-motion";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import config from "../config";
 import authenticationService from '../services/authentication';
 
-const LoginUser = ({ setRole, setID }) => {
-  const baseUrl = config.backend.baseUrl + "/authentication";
+const LoginUser = ({ setRole, setClient }) => {
   const [email_signup, setemail_signup] = useState("");
   const [password_signup, setpassword_signup] = useState("");
   const [first_name, setfirst_name] = useState("");
@@ -53,7 +50,7 @@ const LoginUser = ({ setRole, setID }) => {
 
           if (response.message === "User has been logged in") {
             setRole("Client");
-            setID(response.userID);
+            setClient(response.user_first_name + " " + response.user_last_name);
             setTimeout(() => navigate(fromWhere, { replace: true }), 2000);
           }
         } else {

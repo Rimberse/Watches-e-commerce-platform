@@ -103,6 +103,41 @@ app.post('/api/transaction', async (request, response, next) => {
   }
 });
 
+// POST user credentials. Used to verify user's access rights
+app.post("/api/authentication/login", async (req, res, next) => {
+  const { email, password } = req.body;
+
+  if (!email || !password)
+    return res.send({ message: "Please enter your email & password" });
+  else {
+    try {
+      const response = await authentication.getUser(email, password);
+      console.log("apres response");
+
+      if (response.message === "User has been logged in") {
+        const user = JSON.parse(JSON.stringify(response));
+        const token = jwt.sign(user, "sljkfkectirerupâzaklndncwckvmàyutgri", {
+          expiresIn: "240m",
+        });
+
+        res.cookie("jwt", token, {
+          httpOnly: true,
+          secure: true,
+          sameSite: "none",
+          //maxAge: maxAge * 1000,
+        });
+
+        console.log(token);
+      }
+      
+      res.send(response);
+    } catch (err) {
+      console.log(`Error while checking user credentials `, err.message);
+      res.status(400).json({ err });
+    }
+  }
+});
+
 // POST user credentials for signing up. Used to create new users accounts
 app.post('/api/authentication/signup', async (req, res, next) => {
   const {
