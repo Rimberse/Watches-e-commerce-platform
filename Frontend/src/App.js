@@ -12,18 +12,18 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
   const [user, setUser] = useState("Guest");      // Used to grand the admin right to perform CRUD operations
-  const [client, setClient] = useState("Guest");  // Used to get clientID from DB, which is used later on when client makes a purchase
+  const [userID, setUserID] = useState(0);        // Used to get clientID from DB, which is used later on when client makes a purchase
   
   return (
     <div className="App">
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path="/LoginUser" element={<LoginUser setRole={setUser} setClient={setClient} />}/>
-        <Route path="/LoginAdmin" element={<LoginAdmin setRole={setClient} />} />
+        <Route path="/LoginUser" element={<LoginUser setUserID={setUserID} setRole={setUser} />}/>
+        <Route path="/LoginAdmin" element={<LoginAdmin setRole={setUser} />} />
         <Route path="/ForgotPassword" element={<ForgotPassword />} />
         <Route path='/payment' element={<Payment />} />
-        <Route path='/Shop' element={<Watches user={client} />} />
-        <Route path='/Transaction-history' element={<TransactionHistory user={client} />} />
+        <Route path='/Shop' element={<Watches user={user} userID={userID} />} />
+        <Route path='/Transaction-history' element={<TransactionHistory user={user} />} />
       </Routes>
     </div>
   );

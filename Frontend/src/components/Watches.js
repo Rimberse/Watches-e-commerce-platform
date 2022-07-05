@@ -7,7 +7,7 @@ import shopService from '../services/shop';
 import '../styles/Watches.css';
 import Navbar from './Navbar';
 
-const Watches = ({ user }) => {
+const Watches = ({ user, userID }) => {
     const [watches, setWatches] = useState([]);
     const [page, setPage] = useState(Number(1));
     const lastPage = useRef(0);
@@ -60,10 +60,10 @@ const Watches = ({ user }) => {
         <>
             <Navbar user={user} />
             <div className='store'>
-                <WatchForm user={"Admin"} />
-                <Cart watch={cart[cart.length - 1]} contents={cart} user={'Client'} userID={1} />
+                <WatchForm user={user} />
+                <Cart watch={cart[cart.length - 1]} contents={cart} user={user} userID={userID} />
                 <ul>
-                    {watches.map(watch => <li key={watch.IdWatches}><Card watch={watch} user={"Admin"} reflectChanges={refresh} addToCart={() => { addToCart(watch) } } /></li>)}
+                    {watches.map(watch => <li key={watch.IdWatches}><Card watch={watch} user={user} reflectChanges={refresh} addToCart={() => { addToCart(watch) } } /></li>)}
                 </ul>
             
                 <div className="pagination-bar">

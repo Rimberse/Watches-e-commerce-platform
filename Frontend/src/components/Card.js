@@ -52,12 +52,12 @@ const Card = ({ user, watch, reflectChanges, addToCart }) => {
                 <p className='watch-card-details-info-description'>{ watch.Description }</p>
                 <div className='watch-card-details-info-bottom'>
                   <h3 className='watch-card-details-info-price'>{ formatter.format(watch.Price) }</h3>
-                  <button className='watch-card-details-info-cart' onClick={addToCart}>Add to cart</button>
+                  {(user !== 'Administrator' && user !== 'Guest') && <button className='watch-card-details-info-cart' onClick={addToCart}>Add to cart</button>}
                 </div>
             </div>
           </div>
         </div>
-        {user === 'Admin' && <div>
+        {user === 'Administrator' && <div>
           <button className="watch-card-edit-btn" onClick={editHandler}><FiEdit /></button>
           <button className="watch-card-delete-btn" ref={btnRef} onClick={deleteHandler}><BsTrash /></button>
         </div>}

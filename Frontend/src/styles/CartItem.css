@@ -1,6 +1,6 @@
 .item {
     width: 80%;
-    height: 125px;
+    height: 135px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -40,13 +40,13 @@
 }
 
 .details-name {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 600;
     color: var(--card-header-name-color);
 }
 
 .details-brand {
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -68,7 +68,7 @@
     align-items: center;
     width: 25px;
     height: 25px;
-    font-size: 26px;
+    font-size: 24px;
     color: #fff;
     font-weight: 800;
     padding: 2.5px;

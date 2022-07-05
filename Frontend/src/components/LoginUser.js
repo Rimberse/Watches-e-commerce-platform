@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import authenticationService from '../services/authentication';
 
-const LoginUser = ({ setRole, setClient }) => {
+const LoginUser = ({ setUserID, setRole }) => {
   const [email_signup, setemail_signup] = useState("");
   const [password_signup, setpassword_signup] = useState("");
   const [first_name, setfirst_name] = useState("");
@@ -49,8 +49,8 @@ const LoginUser = ({ setRole, setClient }) => {
           alert(response.message);
 
           if (response.message === "User has been logged in") {
-            setRole("Client");
-            setClient(response.user_first_name + " " + response.user_last_name);
+            setUserID(response.user_id);
+            setRole(response.user_first_name + " " + response.user_last_name);
             setTimeout(() => navigate(fromWhere, { replace: true }), 2000);
           }
         } else {
