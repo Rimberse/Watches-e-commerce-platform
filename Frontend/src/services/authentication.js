@@ -15,9 +15,16 @@ const login = payload => {
     return request.then(response => response.data);
 };
 
+const sendEmail = payload => {
+    const request = axios.post(baseUrl + "/forgotPassword", payload);
+
+    return request.then(response => response.data);
+}
+
 const authenticationService = {
     signup,
-    login
+    login,
+    sendEmail
 }
 
 export default authenticationService;

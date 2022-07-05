@@ -6,7 +6,12 @@ const jwt = require("jsonwebtoken");
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
+var path = require ('path');
 require("dotenv").config({ path: "../.env" });
+// app.use(express.static(__dirname + '../public'));
+app.use(express.static(__dirname + '/views'));
+app.engine('html', require('ejs').renderFile);
+app.set("view engine", "ejs");
 const shop = require("./services/shop");
 const transaction = require("./services/transaction");
 const authentication = require("./services/authentication");
@@ -112,11 +117,10 @@ app.post("/api/authentication/login", async (req, res, next) => {
   else {
     try {
       const response = await authentication.getUser(email, password);
-      console.log("apres response");
 
       if (response.message === "User has been logged in") {
         const user = JSON.parse(JSON.stringify(response));
-        const token = jwt.sign(user, "sljkfkectirerupâzaklndncwckvmàyutgri", {
+        const token = jwt.sign(user, process.env.JWT_TOKEN, {
           expiresIn: "240m",
         });
 
@@ -161,7 +165,7 @@ app.post('/api/authentication/signup', async (req, res, next) => {
       if (response.message === "Registered successfully") {
         const user = JSON.parse(JSON.stringify(response));
 
-        const token = jwt.sign(user, "sljkfkectirerupâzaklndncwckvmàyutgri", {
+        const token = jwt.sign(user, process.env.JWT_TOKEN, {
           expiresIn: 6000,
         });
 
@@ -179,6 +183,95 @@ app.post('/api/authentication/signup', async (req, res, next) => {
       console.log(`Error while signing up user `, err.message);
       next(err);
     }
+  }
+});
+
+// POST user credentials. Used in case if the user has forgotten their credentials
+app.post("/api/authentication/forgotPassword", async (req, res, next) => {
+  const user = req.body;
+
+  const current_user = {
+    email: user.email,
+  };
+
+  if (!user.email) 
+    return res.send({ message: "Please enter your email" });
+  else {
+    try {
+      res.json(await authentication.getPassword(user));
+    } catch (err) {
+      console.log(`Error while retreiving user password `, err.message);
+      next(err);
+    }
+  }
+});
+
+// When the customer click on the link, the following redirect him to the reset password page
+app.get("/api/authentication/resetPassword/:id/:token", async (req, res, next) => {
+  const { id, token } = req.params;
+  // typeof(id) = string => need to parse it to be able after to compare it with the user_id
+  const id_int = parseInt(id);
+
+  try {
+    const customer = await authentication.getCustomer(id_int);
+
+    const user_mail = customer.data.email;
+    const user_password = customer.data.password;
+    const user_id = customer.data.id;
+    
+    // Create a one-use link to reset the password
+    const jwt_secret = process.env.JWT_TOKEN + user_password;
+
+    // if the user_id is present :
+    if (id_int !== user_id) {
+      res.send("Error this id doesn't exist");
+      return;
+    }
+
+    const payload = jwt.verify(token, jwt_secret);
+    res.render("resetPassword", { email: user_mail });
+  } catch (error) {
+    console.log(error.message);
+    res.send(error.message);
+  }
+});
+
+// Used the refresh informations when the user click on reset password button
+app.post("/api/authentication/resetPassword/:id/:token", async (req, res, next) => {
+  const { id, token } = req.params;
+  const id_int = parseInt(id);
+  
+  const { password } = req.body;
+
+  try {
+    const customer = await authentication.getCustomer(id_int);
+
+    const user_mail = customer.data.email;
+    const user_password = customer.data.password;
+    const user_id = customer.data.id;
+
+    // Check the user id :
+    if (id_int !== user_id) {
+      res.send("Id user incorrect...");
+      return;
+    }
+
+    const jwt_secret = process.env.JWT_TOKEN + user_password;
+    
+    const payload = jwt.verify(token, jwt_secret);
+    // Crypt that password from resetPassword.ejs then update the value of the current user\
+    const result = await authentication.modifyCustomerPassword(id, password);
+
+    if (result.message === "Password has been modified") {
+      const customer = await authentication.getCustomer(id);
+
+      if (customer.message === "Customer has been found") {
+        res.send(customer.data);
+      }
+    }
+  } catch (error) {
+    console.log(error.message);
+    res.send(error.message);
   }
 });
 

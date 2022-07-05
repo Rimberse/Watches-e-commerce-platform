@@ -5,7 +5,9 @@ import Payment from './components/Payment';
 import TransactionHistory from './components/TransactionHistory';
 import Home from './components/Home';
 import LoginUser from './components/LoginUser';
+import ForgotPassword from './components/ForgotPassword';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
   const [user, setUser] = useState("Guest");      // Used to grand the admin right to perform CRUD operations
@@ -16,6 +18,7 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path="/LoginUser" element={<LoginUser setRole={setUser} setClient={setClient} />}/>
+        <Route path="/ForgotPassword" element={<ForgotPassword />} />
         <Route path='/payment' element={<Payment />} />
         <Route path='/Shop' element={<Watches user={client} />} />
         <Route path='/Transaction-history' element={<TransactionHistory user={'Admin'} />} />
