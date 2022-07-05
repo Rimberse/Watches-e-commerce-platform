@@ -19,6 +19,12 @@ const Navbar = ({ user }) => {
                     <Link to="/LoginUser">Login/Signup</Link>
                 </li>
                 <li className='Navbar-link'>
+                    <Link to="/Profile">Profile</Link>        
+                </li>
+                <li className='Navbar-link'>
+                    <Link to="/Logout">Logout</Link>
+                </li>
+                <li className='Navbar-link'>
                     <Link to="/Shop">Shop</Link>
                 </li>
                 <li className='Navbar-link'>

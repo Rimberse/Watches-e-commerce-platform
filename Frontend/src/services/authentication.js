@@ -27,11 +27,26 @@ const loginAdmin = payload => {
     return request.then(response => response.data);
 }
 
+const logout = () => {
+    const request = axios.get(baseUrl + "/logout");
+
+    return request.then(response => response.data);
+}
+
+const logOK = () => {
+    axios.defaults.withCredentials = true;
+    const request = axios.get(baseUrl + "/logOK");
+
+    return request.then(response => response.data);
+}
+
 const authenticationService = {
     signup,
     login,
     sendEmail,
-    loginAdmin
+    loginAdmin,
+    logout,
+    logOK
 }
 
 export default authenticationService;

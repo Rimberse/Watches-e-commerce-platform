@@ -4,7 +4,7 @@ const app = express();
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 app.use(express.json());
-app.use(cors());
+app.use(cors({ origin: true, credentials: true }));
 app.use(express.urlencoded({ extended: true }));
 var path = require ('path');
 require("dotenv").config({ path: "../.env" });
@@ -108,6 +108,28 @@ app.post('/api/transaction', async (request, response, next) => {
   }
 });
 
+// Using to implement protected routes
+app.get("/api/authentication/logOK", (req, res) => {
+  const token = req.cookies.jwt;
+
+  console.log(token);
+
+  if (token) {
+    jwt.verify(token, process.env.JWT_TOKEN, (err, decoded) => {
+      if (err) {
+        console.log(err.message);
+        res.send({ message: "error" });
+      } else {
+        console.log("ok : " + token);
+        res.send({ message: "yes connected" });
+      }
+    });
+  } else {
+    console.log("Failure");
+    res.send({ message: "Not connected" });
+  }
+});
+
 // POST admin credentials. Used to verify admin's access rights
 app.post("/api/authentication/adminLogin", async (req, res, next) => {
   const { Id_Admin, password } = req.body;
@@ -170,6 +192,18 @@ app.post("/api/authentication/login", async (req, res, next) => {
       console.log(`Error while checking user credentials `, err.message);
       res.status(400).json({ err });
     }
+  }
+});
+
+// GET request to logout. Used to end user session and logout users from the website
+app.get("/api/authentication/logout", async (req, res) => {
+  try {
+    res.cookie("jwt", "", { maxAge: 1 });
+    return res.send({
+      message: "Succesfully logged out!",
+    });
+  } catch (err) {
+    return res.send({ message: "Error while logging out" });
   }
 });
 
@@ -305,6 +339,13 @@ app.post("/api/authentication/resetPassword/:id/:token", async (req, res, next) 
     res.send(error.message);
   }
 });
+
+// Sends a json response if no associate route is found e.g: (/something/somewhere)
+const unknownEndpoint = (request, response) => {
+  response.status(404).send({ error: "unknown endpoint" });
+};
+
+app.use(unknownEndpoint);
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
