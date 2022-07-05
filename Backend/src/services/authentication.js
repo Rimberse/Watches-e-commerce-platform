@@ -6,6 +6,28 @@ const nodemailer = require("nodemailer");
 // const bodyParser = require("body-parser");
 // const cookieParser = require("cookie-parser");
 
+// Check Admin account :
+const getAdmin = async (email_Admin, password) => {
+  const rows = await db.query(
+    `SELECT IdAdmin, Password FROM Admin WHERE Email="${email_Admin}" AND Password="${password}"`
+  );
+
+  let message;
+ 
+  if (rows[0]) {
+    const element1 = rows[0].IdAdmin;
+    const element2 = rows[0].Password;
+
+    message = "Admin has been logged successfully";
+  } else {
+    message = "Access denied";
+  }
+
+  return {
+    message
+  }
+};
+
 // Check user account :
 const getUser = async (email, password) => {
     const rows = await db.query(`SELECT * FROM Customer WHERE Email="${email}"`);
@@ -195,9 +217,10 @@ const modifyCustomerPassword = async (id, password) => {
 };
 
 module.exports = {
-    getUser,
-    createUser,
-    getPassword,
-    getCustomer,
-    modifyCustomerPassword
+  getAdmin,
+  getUser,
+  createUser,
+  getPassword,
+  getCustomer,
+  modifyCustomerPassword
 };

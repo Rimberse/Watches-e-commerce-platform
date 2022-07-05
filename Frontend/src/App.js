@@ -4,6 +4,7 @@ import Watches from './components/Watches';
 import Payment from './components/Payment';
 import TransactionHistory from './components/TransactionHistory';
 import Home from './components/Home';
+import LoginAdmin from './components/LoginAdmin';
 import LoginUser from './components/LoginUser';
 import ForgotPassword from './components/ForgotPassword';
 import './App.css';
@@ -18,10 +19,11 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path="/LoginUser" element={<LoginUser setRole={setUser} setClient={setClient} />}/>
+        <Route path="/LoginAdmin" element={<LoginAdmin setRole={setClient} />} />
         <Route path="/ForgotPassword" element={<ForgotPassword />} />
         <Route path='/payment' element={<Payment />} />
         <Route path='/Shop' element={<Watches user={client} />} />
-        <Route path='/Transaction-history' element={<TransactionHistory user={'Admin'} />} />
+        <Route path='/Transaction-history' element={<TransactionHistory user={client} />} />
       </Routes>
     </div>
   );

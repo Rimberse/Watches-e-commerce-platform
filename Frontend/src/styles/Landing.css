@@ -1,7 +1,7 @@
 .background {
     position: fixed;
     width: 100%;
-    min-height:100%;
+    min-height: 100%;
     object-fit: cover;
     /* z-index: -1; */
     background-image: url("https://images.unsplash.com/photo-1600003014637-ff82a275e191?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1911&q=80");

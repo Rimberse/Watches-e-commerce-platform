@@ -108,6 +108,37 @@ app.post('/api/transaction', async (request, response, next) => {
   }
 });
 
+// POST admin credentials. Used to verify admin's access rights
+app.post("/api/authentication/adminLogin", async (req, res, next) => {
+  const { Id_Admin, password } = req.body;
+
+  if (!Id_Admin || !password)
+    return res.send({ message: "Please enter your id & password" });
+  else {
+    try {
+      const response = await authentication.getAdmin(Id_Admin, password);
+      const user = JSON.parse(JSON.stringify(response));
+
+      const token = jwt.sign(user, process.env.JWT_TOKEN, {
+        expiresIn: "240m",
+      });
+
+      res.cookie("jwt", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+        //maxAge: maxAge * 1000,
+      });
+      
+      console.log(token);
+      res.send(response);
+    } catch (err) {
+      console.log(`Error while checking admin credentials `, err.message);
+      next(err);
+    }
+  }
+});
+
 // POST user credentials. Used to verify user's access rights
 app.post("/api/authentication/login", async (req, res, next) => {
   const { email, password } = req.body;

@@ -21,10 +21,17 @@ const sendEmail = payload => {
     return request.then(response => response.data);
 }
 
+const loginAdmin = payload => {
+    const request = axios.post(baseUrl + "/adminLogin", payload);
+
+    return request.then(response => response.data);
+}
+
 const authenticationService = {
     signup,
     login,
-    sendEmail
+    sendEmail,
+    loginAdmin
 }
 
 export default authenticationService;
