@@ -10,7 +10,8 @@ const signup = payload => {
 };
 
 const login = payload => {
-    const request = axios.post(baseUrl + "/login", payload);
+    axios.defaults.withCredentials = true;
+    const request = axios.post(baseUrl + "/login", payload, { credentials: 'include' });
 
     return request.then(response => response.data);
 };
@@ -22,7 +23,8 @@ const sendEmail = payload => {
 }
 
 const loginAdmin = payload => {
-    const request = axios.post(baseUrl + "/adminLogin", payload);
+    axios.defaults.withCredentials = true;
+    const request = axios.post(baseUrl + "/adminLogin", payload, { credentials: 'include' });
 
     return request.then(response => response.data);
 }
@@ -35,7 +37,29 @@ const logout = () => {
 
 const logOK = () => {
     axios.defaults.withCredentials = true;
-    const request = axios.get(baseUrl + "/logOK");
+    const request = axios.get(baseUrl + "/logOK", {}, { 'withCredentials': true });
+
+    return request.then(response => response.data);
+}
+
+const verifyUser = () => {
+    const request = axios.get(baseUrl + "/validUser");
+
+    return request.then(response => response.data);
+}
+
+const deleteUser = id => {
+    const request = axios.delete(baseUrl + "/deleteUser/" + id);
+
+    return request.then(response => response.data);
+}
+
+const updateUser = (id, payload) => {
+    const request = axios.put(baseUrl + "/updateUser/" + id, JSON.stringify(payload), {
+        headers: {
+            'Content-Type': 'application/json'
+        }, 'withCredentials': true
+    });
 
     return request.then(response => response.data);
 }
@@ -46,7 +70,10 @@ const authenticationService = {
     sendEmail,
     loginAdmin,
     logout,
-    logOK
+    logOK,
+    verifyUser,
+    deleteUser,
+    updateUser
 }
 
 export default authenticationService;

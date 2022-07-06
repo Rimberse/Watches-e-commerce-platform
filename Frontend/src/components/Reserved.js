@@ -18,14 +18,10 @@ export default function Reserved() {
             resultat = false;
 
             if (result === "yes connected") {
-                console.log("oooooooo");
                 setloggedIn(true);
-                console.log("celui de yes");
                 console.log(loggedIn);
                 return loggedIn;
             } else {
-                console.log("oooooooopp");
-                console.log("celui de no");
                 resultat = false;
                 setloggedIn(false);
                 console.log(loggedIn);

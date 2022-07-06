@@ -3,8 +3,9 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
 app.use(express.json());
-app.use(cors({ origin: true, credentials: true }));
 app.use(express.urlencoded({ extended: true }));
 var path = require ('path');
 require("dotenv").config({ path: "../.env" });
@@ -26,6 +27,8 @@ const requestLogger = (request, response, next) => {
 };
 
 app.use(requestLogger);
+app.use(cookieParser());
+app.use(cors({ origin: true, credentials: true }));
 
 // Used to display the errors and the their message
 app.use((error, request, response, next) => {
@@ -108,8 +111,39 @@ app.post('/api/transaction', async (request, response, next) => {
   }
 });
 
+// Display the name and allowed logout when a person has succesfully login : OK
+app.get("/api/authentication/validUser", async (req, res, next) => {
+  const token = req.cookies.jwt;
+  console.log(token);
+
+  if (token) {
+    jwt.verify(token, process.env.JWT_TOKEN, (err, decoded) => {
+        if (err) {
+          console.log(err.message);
+          res.send({ message: "error" });
+          res.locals.id = null;
+        } else {
+          // permet d'afficher l'object decoded
+          let user = decoded;
+          // user_final = util.inspect(user, false, null, true);
+          const id = user.user_id;
+          const element1 = user.user_first_name;
+          const element2 = user.user_last_name;
+          const element3 = user.user_mail;
+          res.send({ element1, element2, element3, id });
+        }
+      });
+  } else {
+    console.log("noooooooo");
+    res.send({ message: "no connected" });
+    res.locals.userID = null;
+    next();
+  }
+});
+
 // Using to implement protected routes
 app.get("/api/authentication/logOK", (req, res) => {
+  console.log(req.cookies);
   const token = req.cookies.jwt;
 
   console.log(token);
@@ -250,6 +284,36 @@ app.post('/api/authentication/signup', async (req, res, next) => {
     }
   }
 });
+
+app.put("/api/authentication/updateUser/:id", async (request, response, next) => {
+  const nom = request.body.nom;
+  const prenom = request.body.prenom;
+  const email = request.body.mail;
+  const id = request.params.id;
+
+  try {
+    response.json(await authentication.updateCustomer(id, {
+      nom,
+      prenom,
+      email
+    }));
+  } catch (error) {
+    console.error(`Error while updating user informations `, error.message);
+    next(error);
+  }
+});
+
+// Using to delete current user :
+app.delete("/api/authentication/deleteUser/:id", async (request, response, next) => {
+    try {
+      console.log(request.params.id);
+      response.json(await authentication.remove(request.params.id));
+    } catch (error) {
+      console.error(`Error while removing a user `, error.message);
+      next(error);
+    }
+  }
+);
 
 // POST user credentials. Used in case if the user has forgotten their credentials
 app.post("/api/authentication/forgotPassword", async (req, res, next) => {

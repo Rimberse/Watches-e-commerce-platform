@@ -216,11 +216,51 @@ const modifyCustomerPassword = async (id, password) => {
     }
 };
 
+// delete current user
+const remove = async id => {
+  const result = await db.query(`DELETE FROM Customer WHERE IdCustomer ="${id}"`);
+  let message = "Error while deleting a User";
+
+  if (result.affectedRows) {
+    message = "User has been removed successfully";
+  }
+
+  return { message };
+};
+
+const updateCustomer = async (id, customer) => {
+  const rows = await db.query(`SELECT * FROM Customer WHERE IdCustomer = "${id}"`);
+
+  console.log(customer);
+  let message = "Failed to update user information";
+
+  if (rows[0]) {
+    let user_id = rows[0].IdCustomer;
+    let user_mail = rows[0].Email;
+    let user_last_name = rows[0].LastName;
+    let user_first_name = rows[0].FirstName;
+  
+    const result = await db.query(
+      `UPDATE Customer SET FirstName="${customer.prenom}", LastName="${customer.nom}", Email="${customer.email}" WHERE idCustomer=${id}`
+    );
+
+    if (result.affectedRows) {
+      message = "User informations have been successfully updated";
+    }
+  }
+
+  return {
+    message
+  }
+}
+
 module.exports = {
   getAdmin,
   getUser,
   createUser,
   getPassword,
   getCustomer,
-  modifyCustomerPassword
+  modifyCustomerPassword,
+  remove,
+  updateCustomer
 };
