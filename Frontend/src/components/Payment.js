@@ -3,42 +3,28 @@ import React, { useEffect, useState } from 'react'
 import "../styles/Payment.css"
 import axios from 'axios';
 
-const Payment = ({totalprice}) => {
-  const [data, setData] = useState(null);
+const Payment = ({ totalprice, basket }) => {
+  const [total, setTotal] = useState(0);
     
   useEffect(() => {
-    const loadData = async () => {
-        try{
-            const response = await axios.get("http://localhost:5000/api/basket");
-            setData(response);
+    let sum = 0;
 
-        } catch (error){
+    basket.forEach(item => {
+      sum += item.Price;
+      console.log(sum);
+    });
 
-        }
-      };
-
-    loadData();
+    // setTotal(Math.round(sum));
+    setTotal(sum);
   }, []);
 
-  let total = totalprice
   console.log(totalprice); 
 
-  if(data == null){
+  if (!basket){
     return(
       <h1>Page loading ...</h1>
     )
-  } else{
-    const calcTotal = () => {
-      data.data.forEach(elem => {
-        total += elem.Price
-        console.log(total)
-      })
-      
-      // Round cause paypal won't take too many numbers
-      total = Math.round(total)
-    }
-      
-    calcTotal();
+  } else {
   
     return (
       <div className="payment-body">

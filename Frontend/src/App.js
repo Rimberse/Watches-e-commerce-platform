@@ -26,13 +26,12 @@ const App = () => {
         <Route path="/LoginAdmin" element={<LoginAdmin setRole={setUser} />} />
         <Route path="/Logout" element={<Logout />}/>
         <Route path="/ForgotPassword" element={<ForgotPassword />} />
-        <Route path='/payment' element={<Payment />} />
         <Route path='/Shop' element={<Watches user={user} userID={userID} />} />
         <Route path='/Transaction-history' element={<TransactionHistory user={user} />} />
         <Route element={<Reserved />}>
           <Route path="/ModifyUser" element={<ModifyUser />} />
+          <Route path='/Payment' element={<Payment />} />
           <Route path="*" element={<NotFound />} />
-          {/* <Route path="*" element={<currentUser />} /> */}
         </Route>
       </Routes>
     </div>
