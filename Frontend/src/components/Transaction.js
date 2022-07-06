@@ -34,7 +34,7 @@ const Transaction = ({ watch, client, quantity }) => {
                         <p className='transaction-client-email'>{ client.Email }</p>
                     </div>
                 </div>
-                <h2 className='transaction-quantity'>{ quantity }</h2>
+                <span className='transaction-quantity'>{ quantity }</span>
             </div>
         </>
     );

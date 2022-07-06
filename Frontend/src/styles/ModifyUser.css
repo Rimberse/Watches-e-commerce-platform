@@ -1,0 +1,8 @@
+.Content {
+    width: 100wv;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}

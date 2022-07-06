@@ -14,7 +14,7 @@ const WatchForm = ({ user, watch, reflectChanges }) => {
   }, []);
 
   const displayPropertyForm = () => {
-    if (user === 'Admin' || user === 'Edit') {
+    if (user === 'Administrator' || user === 'Edit') {
       setShowForm(!showForm);
     }
   };
@@ -70,7 +70,7 @@ const WatchForm = ({ user, watch, reflectChanges }) => {
     <div className="watch-form">
       {(message !== '') &&
         <h2 className={"status-message " + (message !== "Please fill in the form correctly!" ? "success" : "error")}>{message}</h2>}
-      {!showForm && user === 'Admin' && <button onClick={displayPropertyForm} className="new-watch-btn"></button>}
+      {(!showForm && user === 'Administrator') && <button onClick={displayPropertyForm} className="new-watch-btn"></button>}
       {showForm &&
         <form action={baseUrl} method="POST" className="new-watch-form" onSubmit={handleSubmit}>
           <div className="new-watch-form-column">
@@ -133,7 +133,7 @@ const WatchForm = ({ user, watch, reflectChanges }) => {
               <input name="Description" id="Description" defaultValue={watch ? watch.Description : "Description..."} type="text"></input>
             </div>
             <div>
-              <button className="new-watch-form-btn">{user === 'Admin' ? "Add" : "Modify"}</button>
+              <button className="new-watch-form-btn">{user === 'Administrator' ? "Add" : "Modify"}</button>
             </div>
             {user !== 'Edit' && <div>
               <button className="new-watch-cancel-btn" type="button" onClick={displayPropertyForm}></button>

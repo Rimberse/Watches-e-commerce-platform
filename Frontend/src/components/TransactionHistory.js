@@ -28,7 +28,7 @@ const TransactionHistory = ({ user }) => {
     const loadNextPage = () => {
         if (transactions.length < 10)
             return;
-    
+
         setPage(page + 1);
     };
 
@@ -46,13 +46,13 @@ const TransactionHistory = ({ user }) => {
               ({ IdCustomer, FirstName, LastName, Email }))(transaction);
         
         return client;
-    }    
+    }   
 
     return(
         <>
             <Navbar user={user} />
             <h1 className='Transaction-history-header'>Transaction history</h1>
-            { user === "Admin" && <div className='Transaction-history'>
+            { user === "Administrator" ? <div className='Transaction-history'>
                 <div className='Transaction-history-columns'>
                     <h3 className='Transaction-history-columns-product'>Product name</h3>
                     <h3 className='Transaction-history-columns-client'>Ordered by</h3>
@@ -60,14 +60,15 @@ const TransactionHistory = ({ user }) => {
                 </div>
 
                 <ul className='transaction-list'>
-                    { transactions.map(transaction => <li key={ transaction.IdWatches } className='transaction-element'><Transaction watch={ retrieveWatch(transaction) } client={ retrieveClient(transaction) } quantity={ transaction.Quantity } /></li>) }
+                    { transactions.map(transaction => <li key={ transaction.IdWatches + transaction.IdCustomer } className='transaction-element'><Transaction watch={ retrieveWatch(transaction) } client={ retrieveClient(transaction) } quantity={ transaction.Quantity } /></li>) }
                 </ul>
 
                 <div className="pagination-bar">
                     <PageButton page={ '\u2190   Prev' } loadPage={ () => loadPrevPage() } isDisabled={ page > 1 ? false : true } />
-                    <PageButton page={ 'Next   \u2192' } loadPage={ () => loadNextPage() } isDisabled={ transactions.length < 10 ? false : true } />
+                    <PageButton page={ 'Next   \u2192' } loadPage={ () => loadNextPage() } isDisabled={ transactions.length < 10 ? true : false } />
                 </div>
-            </div>}
+            </div>
+            : <div className="Transaction-history-no-rights">You Don't have Authorization to View this Page<br></br>Please Log In</div>}
         </>
     );
 }

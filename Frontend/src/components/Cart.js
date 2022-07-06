@@ -148,14 +148,13 @@ const Cart = ({ user, userID, watch, contents }) => {
     // Renders cart items based on cart content. For each cart item renders CartItem component, representing a small piece of information, concering a watch: name, brand, image & price. CartItem component gets rerendered each time quantity changes.
     // Quantity of the items could de increased of decreased using provided button in CartItem. If user tries to decrease quantity beyond 1, cart item gets removed from the cart and no longer displayed (hence why .filter is used before .map function)
     return(
-
         <>
-            {(!displayCart && user === 'Client' && message !== '') && <p className='cart-alert'>{ message }</p>}
-            {(!displayCart && user === 'Client') && <div className='cart-preview'>
+            {(!displayCart && user !== 'Administrator' && user !== 'Guest' && message !== '') && <p className='cart-alert'>{ message }</p>}
+            {(!displayCart && user !== 'Administrator' && user !== 'Guest') && <div className='cart-preview'>
                 <button className='cart-preview-icon' onClick={changeCartVisibility}><AiOutlineShopping /></button>
                 <div className='cart-preview-items'>{ items.filter(item => item.quantity > 0).length }</div>
             </div>}
-            {(displayCart && user === 'Client') && <div className='cart'>
+            {(displayCart && user !== 'Administrator' && user !== 'Guest') && <div className='cart'>
                 <button className='cart-close' onClick={changeCartVisibility}></button>
                 <div className='cart-contents'>
                     <ul>

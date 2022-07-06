@@ -15,7 +15,7 @@ const getAll = async (page = 1) => {
         AND 
             IdCustomer = CustomerId
         GROUP BY 
-            CustomerId, WatchesId HAVING COUNT(*) > 1
+            WatchesId, CustomerId HAVING COUNT(*) > 1
         LIMIT ${offset}, ${config.listPerPage};`
     );
 
