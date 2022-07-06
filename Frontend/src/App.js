@@ -10,6 +10,7 @@ import Logout from './components/Logout';
 import ForgotPassword from './components/ForgotPassword';
 import Reserved from './components/Reserved';
 import ModifyUser from './components/ModifyUser';
+import NotFound from './components/NotFound';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -30,7 +31,7 @@ const App = () => {
         <Route path='/Transaction-history' element={<TransactionHistory user={user} />} />
         <Route element={<Reserved />}>
           <Route path="/ModifyUser" element={<ModifyUser />} />
-          {/* <Route path="*" element={<NotFound />} /> */}
+          <Route path="*" element={<NotFound />} />
           {/* <Route path="*" element={<currentUser />} /> */}
         </Route>
       </Routes>

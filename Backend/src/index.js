@@ -134,7 +134,6 @@ app.get("/api/authentication/validUser", async (req, res, next) => {
         }
       });
   } else {
-    console.log("noooooooo");
     res.send({ message: "no connected" });
     res.locals.userID = null;
     next();
@@ -143,9 +142,7 @@ app.get("/api/authentication/validUser", async (req, res, next) => {
 
 // Using to implement protected routes
 app.get("/api/authentication/logOK", (req, res) => {
-  console.log(req.cookies);
   const token = req.cookies.jwt;
-
   console.log(token);
 
   if (token) {
@@ -285,6 +282,7 @@ app.post('/api/authentication/signup', async (req, res, next) => {
   }
 });
 
+// PUT endpoint used to modify user account informations
 app.put("/api/authentication/updateUser/:id", async (request, response, next) => {
   const nom = request.body.nom;
   const prenom = request.body.prenom;

@@ -10,11 +10,8 @@ const ModifyUser = () => {
 
   // display the current User info :
   const currentUser = () => {
-    console.log('Running currentUser');
     authenticationService.verifyUser()
         .then((response) => {
-            console.log("Response: ");
-            console.log(response);
             if (response) {
                 const first_name = response.element1;
                 const last_name = response.element2;
@@ -47,11 +44,6 @@ const ModifyUser = () => {
 
   // FONCTION UPDATE PROBLEMATIQUE :
   const updateUser = () => {
-    console.log(id);
-    console.log(prenom);
-    console.log(nom);
-    console.log(mail);
-    
     authenticationService.updateUser(id, {
         mail: mail,
         prenom: prenom,
@@ -68,8 +60,6 @@ const ModifyUser = () => {
 
   useEffect(() => {
     currentUser();
-    //updateUser();
-    //deleteUser();
   }, []);
 
   return (
