@@ -60,7 +60,7 @@ const TransactionHistory = ({ user }) => {
                 </div>
 
                 <ul className='transaction-list'>
-                    { transactions.map(transaction => <li key={ transaction.IdWatches + transaction.IdCustomer } className='transaction-element'><Transaction watch={ retrieveWatch(transaction) } client={ retrieveClient(transaction) } quantity={ transaction.Quantity } /></li>) }
+                    { transactions.map(transaction => <li key={ transaction.IdWatches + transaction.IdCustomer + transaction.Quantity } className='transaction-element'><Transaction watch={ retrieveWatch(transaction) } client={ retrieveClient(transaction) } quantity={ transaction.Quantity } /></li>) }
                 </ul>
 
                 <div className="pagination-bar">
