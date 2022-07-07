@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from "react-router-dom";
 import CartItem from './CartItem';
 import "../styles/Cart.css";
 import { AiOutlineShopping } from 'react-icons/ai';
@@ -15,6 +16,21 @@ const Cart = ({ user, userID, watch, contents }) => {
     const [displayCart, setDisplayCart] = useState(false);
     // An alert indicating whether the purchase has been made successfully
     const [message, setMessage] = useState('');
+
+    const location = useLocation();
+    const navigate = useNavigate();
+    const fromWhere = location.state?.fromWhere?.pathname || "/Payment";
+
+    useEffect(() => {
+        // On first render verify if the payment has been proceeded after client being redirected to paypal's payment page
+        if (localStorage.getItem('paymentProceeded')) {
+            // If the payment has been successfull, store transaction informations to db
+            storeTransaction(JSON.parse(localStorage.getItem('transactionInfo')));
+        }
+
+        // Clear all content of localStore to prevent errors
+        localStorage.clear();
+    }, []);
 
     // Re-render the components each time the cart's contents changes
     useEffect(() => {
@@ -105,6 +121,7 @@ const Cart = ({ user, userID, watch, contents }) => {
         // Calculate total for each item by multiplying it's price times quantity of items in cart
         items.forEach(item => total += item.quantity * item.watch.Price);
         // Format the price, to be displayed in a proper manner
+        localStorage.setItem('total', total);
         return formatter.format(total);
     }
 
@@ -134,15 +151,22 @@ const Cart = ({ user, userID, watch, contents }) => {
             transactionInfo.transactions.push(transaction);
         })
 
-        // Once the transaction has been made, empty the cart, display an alert and close the cart
+        // Store transaction informations for later usage, once the payment has been made
+        localStorage.setItem('transactionInfo', JSON.stringify(transactionInfo));
+        setDisplayCart(!displayCart);
+
+        // Redirect client to paypal's payment page
+        setTimeout(() => navigate(fromWhere, { replace: true }), 2000);
+    }
+
+    // Once the transaction has been made, empty the cart, display an alert and close the cart
+    const storeTransaction = transactionInfo => {
         transaction.store(transactionInfo)
             .then(response => {
                 emptyCart();
-                setDisplayCart(!displayCart);
                 setMessage(response.message);
                 setTimeout(() => setMessage(''), 3000);
             });
-
     }
 
     // Renders cart items based on cart content. For each cart item renders CartItem component, representing a small piece of information, concering a watch: name, brand, image & price. CartItem component gets rerendered each time quantity changes.

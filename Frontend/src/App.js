@@ -30,7 +30,7 @@ const App = () => {
         <Route path='/Transaction-history' element={<TransactionHistory user={user} />} />
         <Route element={<Reserved />}>
           <Route path="/ModifyUser" element={<ModifyUser />} />
-          <Route path='/Payment' element={<Payment totalPrice={0.25} />} />
+          <Route path='/Payment' element={<Payment />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
