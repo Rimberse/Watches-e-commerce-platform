@@ -1,17 +1,17 @@
 import React from 'react';
 import '../styles/Footer.css';
 import Map from "./LMap";
-
+import config from '../config';
 
 const Footer = () => {
-    const baseUrl = "http://localhost:5000/api/contact";
+    const baseUrl = config.backend.baseUrl + "/contact";
 
     return (
         <footer className="footer">
             <div className="footer-wrapper">
                 <div className="footer-left">
                     <h1 className="footer-left-header"><a href="/">LuxWatch.</a></h1>
-                    <p className="footer-left-description">Web development project</p>
+                    <p className="footer-left-description">Web development course school project</p>
                     <Map />
                 </div>
                 <div className="footer-right">
@@ -40,7 +40,7 @@ const Footer = () => {
                 </div>
             </div>
             <h2>Made with <a href="https://imgur.com/r/cats" target="_blank" rel="noreferrer">❤️</a> by students of EFREI - Paris Panthéon-Assas University  </h2>
-            <p>© 2022 Kerim HUDAYBERDIEV, Meryem KÖSE, Jessy VY, Zain ZAFAR</p>
+            <p>© 2022 Kerim HUDAYBERDIYEV, Meryem KÖSE, Jessy VY, Zain ZAFAR</p>
             <p>© All rights belong to their respective owners. We do not own any of this content (images, icons, etc.) </p>
         </footer>
     );
