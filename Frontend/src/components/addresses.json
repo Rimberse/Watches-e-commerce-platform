@@ -1,0 +1,38 @@
+[
+    {
+        "address": "3 Av. de la République",
+        "city": "Villejuif",
+        "lat": "48.862725",
+        "lng": "2.287592"
+    },
+    {
+        "address": "Baku Old City, Neftchilar Ave",
+        "city": "Baku",
+        "lat": "40.3833",
+        "lng": "49.8666"
+    },
+    {
+        "address": "Eha 26 Lääne-Virumaa",
+        "city": "Järsi",
+        "lat": "59.43333",
+        "lng": "24.7166"
+    },
+    {
+        "address": "8 rue de Beaupaire",
+        "city": "Paris",
+        "lat": "48.86666",
+        "lng": "2.3333"
+    },
+    {
+        "address": "13 rue Sainte-Catherine",
+        "city": "Bordeaux",
+        "lat": "44.837789",
+        "lng": "-0.57918"
+    },
+    {
+        "address": "Misbah road",
+        "city": "New Delhi",
+        "lat": "28.644800",
+        "lng": "77.216721"
+    }
+]

@@ -65,3 +65,131 @@ ul {
 ul > li {
   display: inline-block;
 }
+
+/* Footer */
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 875px;
+  padding: 75px 150px;
+  margin-top: 125px;
+  background-color: #1A1A1D;
+}
+
+.footer-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: 55px;
+}
+
+.footer-left, .footer-right {
+  width: 37.5%;
+}
+
+.footer-left a {
+  width: 100%;
+}
+
+.footer-left img {
+  width: 100%;
+  height: 100%;
+}
+
+.footer-right-container-form label {
+  display: block;
+}
+
+.footer-right-container-form {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.footer-right-container-form input[type=text], .footer-right-container-form select, .footer-right-container-form textarea {
+  width: 100%;
+  padding: 7.5px;
+  border: 1px solid var(--main-page-font-color);
+  border-radius: 5px;
+  margin-top: 5px;
+  margin-bottom: 12px;
+}
+
+.footer-right-container-form textarea[id=subject] {
+  height: 100px;
+}
+
+input[type=submit] {
+  background-color: var(--main-success-button-color);
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 3.5px;
+  cursor: pointer;
+  width: 35%;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.footer-left, .footer-right, .footer h2, .footer p {
+  color: #fff;
+}
+
+.footer h2 a:link, .footer-left a:link {
+  text-decoration: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.footer h2 a:visited, .footer-left a:visited {
+  text-decoration: inherit;
+  color: inherit;
+  cursor: auto;
+}
+
+.footer h2 {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.footer p {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.footer-left-header {
+  font-size: 38px;
+  font-weight: 800;
+  margin-bottom: 75px;
+}
+
+.footer-right h2 {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 50px;
+}
+
+.footer-left p {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 125px;
+}
+
+.footer-img {
+  object-fit: cover;
+  position: relative;
+  width: 5px;
+  height: 5px;
+}
+
+.leaflet-container {
+  height: 300px;
+  width: 550px;
+}
+
+/* Footer */

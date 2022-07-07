@@ -1,6 +1,8 @@
 import React from 'react';
 import '../App.css';
 import logo from '../resources/images/Logo_Efrei_2022.svg.png';
+import Map from "./LMap";
+
 
 const Footer = () => {
     const baseUrl = "http://localhost:5000/api/contact";
@@ -9,11 +11,12 @@ const Footer = () => {
         <footer className="footer">
             <div className="footer-wrapper">
                 <div className="footer-left">
-                    <h1 className="footer-left-header"><a href="/">ReSTATE.</a></h1>
-                    <p className="footer-left-description">Relational Database course school project</p>
-                    <a href="https://eng.efrei.fr" target="_blank" rel="noreferrer"><img src={logo} alt="School Logo"></img></a>
+                    <h1 className="footer-left-header"><a href="/">LuxWatch.</a></h1>
+                    <p className="footer-left-description">Web development project</p>
+                    <Map />
                 </div>
                 <div className="footer-right">
+
                     <h2 className="footer-right-header">Contact Us</h2>
                     <div className="footer-right-container">
                         <form action={baseUrl} method="POST" className="footer-right-container-form">
@@ -37,7 +40,7 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
-            <h2>Made with <a href="https://imgur.com/r/cats" target="_blank" rel="noreferrer">❤️</a> by students of EFREI - Paris Panthéon-Assas University</h2>
+            <h2>Made with <a href="https://imgur.com/r/cats" target="_blank" rel="noreferrer">❤️</a> by students of EFREI - Paris Panthéon-Assas University  </h2>
             <p>© 2022 Kerim HUDAYBERDIEV, Meryem KÖSE, Jessy VY, Zain ZAFAR</p>
             <p>© All rights belong to their respective owners. We do not own any of this content (images, icons, etc.) </p>
         </footer>

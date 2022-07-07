@@ -6,6 +6,7 @@ import Cart from './Cart';
 import shopService from '../services/shop';
 import '../styles/Watches.css';
 import Navbar from './Navbar';
+import Footer from "./Footer";
 
 const Watches = ({ user }) => {
     const [watches, setWatches] = useState([]);
@@ -71,8 +72,11 @@ const Watches = ({ user }) => {
                     <PageButton page={ 'Next   \u2192' } loadPage={ () => loadNextPage() } isDisabled={ page < lastPage.current ? false : true } />
                 </div>
             </div>
+            <Footer />
+
         </>
-    );
+
+);
 }
 
 export default Watches;
