@@ -17,6 +17,9 @@ const shop = require("./services/shop");
 const transaction = require("./services/transaction");
 const authentication = require("./services/authentication");
 
+// Serve static files from the React frontend app
+app.use(express.static(path.join(__dirname, '../build')));
+
 // Used for logging purposes
 const requestLogger = (request, response, next) => {
   console.log("Method:", request.method);
@@ -401,6 +404,11 @@ app.post("/api/authentication/resetPassword/:id/:token", async (req, res, next) 
     res.send(error.message);
   }
 });
+
+// AFTER defining routes: Anything that doesn't match what's above, send back index.html; (the beginning slash ('/') in the string is important!)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/../build/index.html'))
+})
 
 // Sends a json response if no associate route is found e.g: (/something/somewhere)
 const unknownEndpoint = (request, response) => {
