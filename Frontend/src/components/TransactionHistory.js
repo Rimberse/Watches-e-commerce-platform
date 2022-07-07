@@ -4,6 +4,7 @@ import transactionService from '../services/transaction';
 import Transaction from './Transaction';
 import PageButton from './PageButton';
 import Navbar from './Navbar';
+import Footer from './Footer';
 
 // Lets the admin to view number of purchases have been made by each client: Product information, quantity ordered, price, client
 const TransactionHistory = ({ user }) => {
@@ -69,6 +70,7 @@ const TransactionHistory = ({ user }) => {
                 </div>
             </div>
             : <div className="Transaction-history-no-rights">You Don't have Authorization to View this Page<br></br>Please Log In</div>}
+            <Footer />
         </>
     );
 }
