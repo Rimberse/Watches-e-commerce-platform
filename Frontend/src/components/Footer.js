@@ -1,6 +1,5 @@
 import React from 'react';
-import '../App.css';
-import logo from '../resources/images/Logo_Efrei_2022.svg.png';
+import '../styles/Footer.css';
 import Map from "./LMap";
 
 
